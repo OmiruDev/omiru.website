@@ -72,7 +72,10 @@ if (header) {
 }
 
 // TEXT ANIMATION EFFECT FOR HERO SECTION
-const letterBoxes = document.querySelectorAll("[data-letter-effect]");
+// Make animation robust to empty items
+const letterBoxesAll = document.querySelectorAll("[data-letter-effect]");
+const letterBoxes = Array.from(letterBoxesAll).filter(el => el.textContent.trim().length > 0);
+
 if (letterBoxes.length > 0) {
   let activeLetterBoxIndex = 0;
   let lastActiveLetterBoxIndex = 0;
@@ -108,7 +111,7 @@ if (letterBoxes.length > 0) {
       activeLetterBoxIndex = (activeLetterBoxIndex + 1) % letterBoxes.length;
       setLetterEffect();
     }, (totalLetterBoxDelay * 1000) + 3000);
-  }
+  };
 
   window.addEventListener("load", setLetterEffect);
 }
@@ -284,3 +287,51 @@ if (educationSection) {
     });
   }
 }
+
+// SOCIAL ICON LABEL ON TOUCH: first tap shows label, second tap opens link
+document.addEventListener('DOMContentLoaded', () => {
+  const socialLinks = document.querySelectorAll('.social-list .social-link');
+  socialLinks.forEach((a) => {
+    let armed = false;
+    a.addEventListener('touchend', (e) => {
+      // if not armed, show label and block navigation once
+      if (!armed) {
+        armed = true;
+        a.classList.add('show-label');
+        e.preventDefault();
+        setTimeout(() => {
+          armed = false;
+          a.classList.remove('show-label');
+        }, 1500);
+      }
+    }, { passive: false });
+  });
+});
+
+// NEWS & EVENTS: Load more (2 at a time)
+document.addEventListener('DOMContentLoaded', () => {
+  const btn = document.querySelector('[data-load-more-projects]');
+  if (!btn) return;
+
+  const list = btn.closest('.project-list');
+  if (!list) return;
+
+  const getHidden = () => Array.from(list.querySelectorAll('li.is-hidden'));
+
+  // Show the button only if there are hidden items
+  if (getHidden().length === 0) {
+    btn.textContent = 'All loaded';
+    btn.disabled = true;
+  }
+
+  btn.addEventListener('click', () => {
+    const toShow = getHidden().slice(0, 2);
+    toShow.forEach(li => li.classList.remove('is-hidden'));
+
+    const left = getHidden().length;
+    if (left === 0) {
+      btn.textContent = 'All loaded';
+      btn.disabled = true;
+    }
+  });
+});
