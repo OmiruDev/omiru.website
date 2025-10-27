@@ -540,6 +540,7 @@ body.active { overflow: hidden; }
 
 
 
+
 /*-----------------------------------*\
   #HERO
 \*-----------------------------------*/
@@ -549,45 +550,29 @@ body.active { overflow: hidden; }
   text-align: center;
 }
 
-/* Avatar / logo in the hero */
 .hero-banner {
   max-width: 150px;
   margin-inline: auto;
   margin-block-end: 20px;
 }
 
-/* Rotating title wrapper */
 .hero .wrapper {
   position: relative;
   text-align: left;
-  height: 1.2em;           /* shows only one title line height */
+  height: 1.2em;
   margin-block: 10px 25px;
 }
 
-/* Make the rotating titles smaller and responsive */
-.hero .wrapper.h2 {
-  font-size: clamp(0.75rem, 1.2vw + 0.3rem, 0.95rem); /* ~12–15px range */
-  line-height: 1.15;
-  letter-spacing: 0.02em;
-  font-weight: var(--fw-600, 600);
-}
-
-/* Each title line (stacked on top of each other) */
 .hero .wrapper .strong {
   position: absolute;
   top: 0;
   left: 50%;
   transform: translateX(-50%);
-  width: 300px;            /* fixed line measure; adjust below for small screens */
+  width: 300px;
   font-weight: inherit;
-  display: flex;           /* letters often become spans, keep them horizontal */
-  flex-wrap: nowrap;
-  justify-content: center;
-  align-items: baseline;
-  white-space: nowrap;     /* prevent break across lines */
+  display: flex;
 }
 
-/* Subtitle beneath the rotating title */
 .hero-text {
   font-size: var(--fs-10);
   font-weight: var(--fw-300);
@@ -595,33 +580,21 @@ body.active { overflow: hidden; }
   letter-spacing: 5px;
 }
 
-/* Space node used between letter spans */
-.hero .wrapper .space {
-  padding: 0.1em;
-  width: 0.3em; /* ensure space has consistent width */
-}
+.hero .wrapper .space { padding: 0.1em; }
 
-/* Letter-level animation states */
 .hero .wrapper :is(.in, .out) {
   opacity: 0;
   transform: scaleY(0);
-  transform-origin: 50% 100%;
-  will-change: opacity, transform;
 }
 
-/* When a line is active, its "out" letters become visible (reverse animation) */
 .hero .strong.active .out {
   opacity: 1;
   transform: scaleY(1);
   animation: textWave 0.2s ease reverse forwards;
 }
 
-/* Incoming letters animation */
-.hero .wrapper .in {
-  animation: textWave 0.2s ease forwards;
-}
+.hero .wrapper .in { animation: textWave 0.2s ease forwards; }
 
-/* Wave-like vertical scale reveal */
 @keyframes textWave {
   0% {
     opacity: 0;
@@ -633,15 +606,7 @@ body.active { overflow: hidden; }
   }
 }
 
-/* Accessibility: reduce motion if user prefers */
-@media (prefers-reduced-motion: reduce) {
-  .hero .wrapper :is(.in, .out),
-  .hero .strong.active .out {
-    opacity: 1;
-    transform: none;
-    animation: none;
-  }
-}
+
 
 /*-----------------------------------*\
   #RESPONSIVE
