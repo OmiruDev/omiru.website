@@ -99,11 +99,10 @@
 }
 
 :root[data-theme="light"] {
-  /* Light theme colors */
   --smokey-black: hsl(0, 0%, 98%);
   --eerie-black: hsl(0, 0%, 95%);
-  --white: hsl(0, 0%, 7%);
-  --black: hsl(0, 0%, 100%);
+  --white: hsl(0, 0%, 100%);
+  --black: hsl(0, 0%, 0%);
   --jet-1: hsl(0, 0%, 95%);
   --jet-2: hsl(0, 0%, 90%);
   --white_a9: hsla(0, 0%, 7%, 0.09);
@@ -113,7 +112,6 @@
   --white_a70: hsla(0, 0%, 7%, 0.7);
   --white_a75: hsla(0, 0%, 7%, 0.75);
   --white_a80: hsla(0, 0%, 7%, 0.8);
-
   --gradient-1: linear-gradient(180deg, transparent, var(--smokey-black));
   --gradient-2: linear-gradient(180deg, var(--smokey-black) 25%, hsla(0, 0%, 100%, 0.6) 80%);
 }
@@ -575,138 +573,65 @@ body.active { overflow: hidden; }
   text-align: center;
 }
 
-.hero-inner {
-  max-width: 1100px;
-  padding-inline: 16px;
-  margin-inline: auto;
-}
-
-/* Avatar / logo in the hero */
 .hero-banner {
-  max-width: 150px;
-  height: auto;
+  width: min(45vw, 440px);
+  max-width: none;
   margin-inline: auto;
   margin-block-end: 20px;
-  display: block;
 }
 
-/* Support text under the banner */
+.hero .wrapper {
+  position: relative;
+  text-align: center;
+  height: 1.2em;
+  margin-block: 10px 25px;
+  overflow: hidden;
+}
+
+.hero .wrapper .strong {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: max-content;
+  font-weight: inherit;
+  display: inline-flex;
+  white-space: nowrap;
+}
+
 .hero-text {
-  font-size: var(--fs-10, 0.875rem);
-  font-weight: var(--fw-300, 300);
+  font-size: var(--fs-10);
+  font-weight: var(--fw-300);
   text-transform: uppercase;
   letter-spacing: 5px;
-  margin: 0;
 }
 
-/* Horizontal roles wrapper */
-.hero .wrapper {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-wrap: wrap;              /* Wrap when narrow */
-  gap: 10px 14px;               /* Row/column spacing */
-  text-align: center;
-  height: auto;                 /* No clipping */
-  margin-block: 10px 25px;
-}
+.hero .wrapper .space { padding: 0.1em; }
 
-/* Medium text size for the roles */
-.hero .wrapper.h2 {
-  font-size: clamp(0.95rem, 0.6vw + 0.85rem, 1.125rem); /* ~15–18px */
-  line-height: 1.25;
-  letter-spacing: 0.01em;
-  font-weight: var(--fw-600, 600);
-}
-
-/* Each role item displayed inline horizontally */
-.hero .wrapper .title,
-.hero .wrapper .strong {        /* Backward compatibility for existing <strong> */
-  position: static;             /* Avoid absolute; no stacking */
-  transform: none;
-  width: auto;
-  display: inline-flex;
-  white-space: nowrap;          /* Keep each role on one line */
-  font-weight: inherit;
-}
-
-/* If your letter-splitting script injects .space nodes */
-.hero .wrapper .space {
-  padding: 0.1em;
-  width: 0.3em;                 /* Consistent space width */
-}
-
-/* Ensure anything marked as in/out remains visible in horizontal mode */
 .hero .wrapper :is(.in, .out) {
-  opacity: 1 !important;
-  transform: none !important;
-  animation: none !important;
+  opacity: 0;
+  transform: scaleY(0);
 }
 
 .hero .strong.active .out {
-  opacity: 1 !important;
-  transform: none !important;
-  animation: none !important;
+  opacity: 1;
+  transform: scaleY(1);
+  animation: textWave 0.2s ease reverse forwards;
 }
 
-/* Keep keyframes in case you revert to animated mode later */
+.hero .wrapper .in { animation: textWave 0.2s ease forwards; }
+
 @keyframes textWave {
-  0% { opacity: 0; transform: scaleY(0); }
-  100% { opacity: 1; transform: scaleY(1); }
-}
-
-/* Visually hidden utility for screen-reader-only headings */
-.sr-only {
-  position: absolute !important;
-  width: 1px !important;
-  height: 1px !important;
-  padding: 0 !important;
-  margin: -1px !important;
-  overflow: hidden !important;
-  clip: rect(0, 0, 0, 0) !important;
-  white-space: nowrap !important;
-  border: 0 !important;
-}
-
-/*-----------------------------------*\
-  #RESPONSIVE
-\*-----------------------------------*/
-
-/* Tablet */
-@media (max-width: 768px) {
-  .hero {
-    padding-block-start: 96px;
+  0% {
+    opacity: 0;
+    transform: scaleY(0);
   }
-  .hero .wrapper.h2 {
-    font-size: clamp(0.9rem, 0.8vw + 0.7rem, 1.05rem);
-    line-height: 1.22;
+  100% {
+    opacity: 1;
+    transform: scaleY(1);
   }
 }
 
-/* Mobile */
-@media (max-width: 480px) {
-  .hero {
-    padding-block-start: 80px;
-  }
-  .hero .wrapper.h2 {
-    font-size: 0.95rem; /* Medium on small screens */
-    line-height: 1.18;
-    letter-spacing: 0.01em;
-  }
-  .hero-text {
-    letter-spacing: 3px;
-  }
-}
-
-/* Accessibility: respect reduced motion */
-@media (prefers-reduced-motion: reduce) {
-  .hero .wrapper :is(.in, .out),
-  .hero .strong.active .out {
-    opacity: 1 !important;
-    transform: none !important;
-    animation: none !important;
-  }
-}
 
 
 /*-----------------------------------*\
@@ -820,9 +745,11 @@ body.active { overflow: hidden; }
 
 /* Make the listed titles smaller */
 .wrapper.h2 .strong[data-letter-effect] {
-  font-size: 0.875rem; /* ~14px */
-  line-height: 1.25;
-  display: block; /* ensures each appears on its own line */
+  font-size: 7.8rem;
+  line-height: 2;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 }
 
 
@@ -2091,4 +2018,50 @@ body.active { overflow: hidden; }
   .portfolio .container { padding-inline: 45px; }
 
   .footer-top .container { max-width: 1200px; }
+}
+
+/* Light theme overrides */
+html[data-theme="light"] body {
+  background-color: var(--white);
+  color: var(--black);
+}
+
+html[data-theme="light"] :is(.h1, .h2, .h3, .h4, .h5, .h6),
+html[data-theme="light"] .hero-title,
+html[data-theme="light"] .hero .wrapper .strong,
+html[data-theme="light"] .section-title,
+html[data-theme="light"] .service-card .card-title,
+html[data-theme="light"] .portfolio-card .card-title,
+html[data-theme="light"] .qualification-card .card-title,
+html[data-theme="light"] .certification-card-link .card-title,
+html[data-theme="light"] .contact__card-title,
+html[data-theme="light"] .contact__card-data,
+html[data-theme="light"] .copyright,
+html[data-theme="light"] .social-link,
+html[data-theme="light"] .hero-text {
+  color: var(--black);
+}
+
+html[data-theme="light"] .section-subtitle,
+html[data-theme="light"] .navbar-text,
+html[data-theme="light"] .gallery-card .card-tag,
+html[data-theme="light"] .qualification-card .card-subtitle,
+html[data-theme="light"] .contact__card-data {
+  color: var(--white_a70);
+}
+
+html[data-theme="light"] .navbar,
+html[data-theme="light"] .service-card,
+html[data-theme="light"] .skills-toggle,
+html[data-theme="light"] .skill-card,
+html[data-theme="light"] .qualification-card,
+html[data-theme="light"] .certification-card-link,
+html[data-theme="light"] .contact__card,
+html[data-theme="light"] .footer-top,
+html[data-theme="light"] .footer-bottom {
+  background-color: var(--eerie-black);
+}
+
+html[data-theme="light"] .overlay {
+  background-color: var(--black);
 }
