@@ -719,6 +719,12 @@ body.active { overflow: hidden; }
   100% { transform: translateY(12px); }
 }
 
+/* Make the listed titles smaller */
+.wrapper.h2 .strong[data-letter-effect] {
+  font-size: 0.875rem; /* ~14px */
+  line-height: 1.25;
+  display: block; /* ensures each appears on its own line */
+}
 
 
 
