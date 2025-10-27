@@ -539,8 +539,6 @@ body.active { overflow: hidden; }
 
 
 
-
-
 /*-----------------------------------*\
   #HERO
 \*-----------------------------------*/
@@ -550,62 +548,138 @@ body.active { overflow: hidden; }
   text-align: center;
 }
 
-.hero-banner {
-  max-width: 150px;
+.hero-inner {
+  max-width: 1100px;
+  padding-inline: 16px;
   margin-inline: auto;
-  margin-block-end: 20px;
 }
 
+/* Avatar / logo in the hero */
+.hero-banner {
+  max-width: 150px;
+  height: auto;
+  margin-inline: auto;
+  margin-block-end: 20px;
+  display: block;
+}
+
+/* Support text under the banner */
+.hero-text {
+  font-size: var(--fs-10, 0.875rem);
+  font-weight: var(--fw-300, 300);
+  text-transform: uppercase;
+  letter-spacing: 5px;
+  margin: 0;
+}
+
+/* Horizontal roles wrapper */
 .hero .wrapper {
-  position: relative;
-  text-align: left;
-  height: 1.2em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;              /* Wrap when narrow */
+  gap: 10px 14px;               /* Row/column spacing */
+  text-align: center;
+  height: auto;                 /* No clipping */
   margin-block: 10px 25px;
 }
 
-.hero .wrapper .strong {
-  position: absolute;
-  top: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 300px;
+/* Medium text size for the roles */
+.hero .wrapper.h2 {
+  font-size: clamp(0.95rem, 0.6vw + 0.85rem, 1.125rem); /* ~15–18px */
+  line-height: 1.25;
+  letter-spacing: 0.01em;
+  font-weight: var(--fw-600, 600);
+}
+
+/* Each role item displayed inline horizontally */
+.hero .wrapper .title,
+.hero .wrapper .strong {        /* Backward compatibility for existing <strong> */
+  position: static;             /* Avoid absolute; no stacking */
+  transform: none;
+  width: auto;
+  display: inline-flex;
+  white-space: nowrap;          /* Keep each role on one line */
   font-weight: inherit;
-  display: flex;
 }
 
-.hero-text {
-  font-size: var(--fs-10);
-  font-weight: var(--fw-300);
-  text-transform: uppercase;
-  letter-spacing: 5px;
+/* If your letter-splitting script injects .space nodes */
+.hero .wrapper .space {
+  padding: 0.1em;
+  width: 0.3em;                 /* Consistent space width */
 }
 
-.hero .wrapper .space { padding: 0.1em; }
-
+/* Ensure anything marked as in/out remains visible in horizontal mode */
 .hero .wrapper :is(.in, .out) {
-  opacity: 0;
-  transform: scaleY(0);
+  opacity: 1 !important;
+  transform: none !important;
+  animation: none !important;
 }
 
 .hero .strong.active .out {
-  opacity: 1;
-  transform: scaleY(1);
-  animation: textWave 0.2s ease reverse forwards;
+  opacity: 1 !important;
+  transform: none !important;
+  animation: none !important;
 }
 
-.hero .wrapper .in { animation: textWave 0.2s ease forwards; }
-
+/* Keep keyframes in case you revert to animated mode later */
 @keyframes textWave {
-  0% {
-    opacity: 0;
-    transform: scaleY(0);
+  0% { opacity: 0; transform: scaleY(0); }
+  100% { opacity: 1; transform: scaleY(1); }
+}
+
+/* Visually hidden utility for screen-reader-only headings */
+.sr-only {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
+}
+
+/*-----------------------------------*\
+  #RESPONSIVE
+\*-----------------------------------*/
+
+/* Tablet */
+@media (max-width: 768px) {
+  .hero {
+    padding-block-start: 96px;
   }
-  100% {
-    opacity: 1;
-    transform: scaleY(1);
+  .hero .wrapper.h2 {
+    font-size: clamp(0.9rem, 0.8vw + 0.7rem, 1.05rem);
+    line-height: 1.22;
   }
 }
 
+/* Mobile */
+@media (max-width: 480px) {
+  .hero {
+    padding-block-start: 80px;
+  }
+  .hero .wrapper.h2 {
+    font-size: 0.95rem; /* Medium on small screens */
+    line-height: 1.18;
+    letter-spacing: 0.01em;
+  }
+  .hero-text {
+    letter-spacing: 3px;
+  }
+}
+
+/* Accessibility: respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .hero .wrapper :is(.in, .out),
+  .hero .strong.active .out {
+    opacity: 1 !important;
+    transform: none !important;
+    animation: none !important;
+  }
+}
 
 
 /*-----------------------------------*\
