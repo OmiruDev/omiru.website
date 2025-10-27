@@ -540,7 +540,6 @@ body.active { overflow: hidden; }
 
 
 
-
 /*-----------------------------------*\
   #HERO
 \*-----------------------------------*/
@@ -550,29 +549,46 @@ body.active { overflow: hidden; }
   text-align: center;
 }
 
+/* Avatar / logo in the hero */
 .hero-banner {
   max-width: 150px;
   margin-inline: auto;
   margin-block-end: 20px;
 }
 
+/* Horizontal titles wrapper */
 .hero .wrapper {
-  position: relative;
-  text-align: left;
-  height: 1.2em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;             /* wrap if they don’t fit on one line */
+  gap: 10px 14px;              /* row/column spacing */
+  text-align: center;
+  height: auto;                /* allow natural height */
   margin-block: 10px 25px;
 }
 
-.hero .wrapper .strong {
-  position: absolute;
-  top: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 300px;
-  font-weight: inherit;
-  display: flex;
+/* Medium text size for the titles */
+.hero .wrapper.h2 {
+  font-size: clamp(0.95rem, 0.6vw + 0.85rem, 1.125rem); /* ~15–18px */
+  line-height: 1.2;
+  letter-spacing: 0.01em;
+  font-weight: var(--fw-600, 600);
 }
 
+/* Each title shown inline, horizontally */
+.hero .wrapper .strong {
+  position: static;            /* no absolute stacking */
+  top: auto;
+  left: auto;
+  transform: none;
+  width: auto;
+  display: inline-flex;
+  white-space: nowrap;         /* keep each title on one line */
+  font-weight: inherit;
+}
+
+/* Subtitle beneath the titles */
 .hero-text {
   font-size: var(--fs-10);
   font-weight: var(--fw-300);
@@ -580,32 +596,31 @@ body.active { overflow: hidden; }
   letter-spacing: 5px;
 }
 
-.hero .wrapper .space { padding: 0.1em; }
-
-.hero .wrapper :is(.in, .out) {
-  opacity: 0;
-  transform: scaleY(0);
+/* Optional spacing node between letter spans (if present) */
+.hero .wrapper .space {
+  padding: 0.1em;
+  width: 0.3em;
 }
 
+/* Disable per-letter in/out animation so all titles are visible */
+.hero .wrapper :is(.in, .out) {
+  opacity: 1;
+  transform: none;
+  animation: none;
+}
+
+/* Ensure active state doesn't hide anything */
 .hero .strong.active .out {
   opacity: 1;
-  transform: scaleY(1);
-  animation: textWave 0.2s ease reverse forwards;
+  transform: none;
+  animation: none;
 }
 
-.hero .wrapper .in { animation: textWave 0.2s ease forwards; }
-
+/* Keep keyframes in case you switch back to animated mode */
 @keyframes textWave {
-  0% {
-    opacity: 0;
-    transform: scaleY(0);
-  }
-  100% {
-    opacity: 1;
-    transform: scaleY(1);
-  }
+  0% { opacity: 0; transform: scaleY(0); }
+  100% { opacity: 1; transform: scaleY(1); }
 }
-
 
 
 /*-----------------------------------*\
@@ -618,11 +633,8 @@ body.active { overflow: hidden; }
     padding-block-start: 96px;
   }
   .hero .wrapper.h2 {
-    font-size: clamp(0.75rem, 1vw + 0.32rem, 0.9rem);
-    line-height: 1.12;
-  }
-  .hero .wrapper .strong {
-    width: 280px;
+    font-size: clamp(0.9rem, 0.8vw + 0.7rem, 1.05rem);
+    line-height: 1.18;
   }
 }
 
@@ -632,12 +644,9 @@ body.active { overflow: hidden; }
     padding-block-start: 80px;
   }
   .hero .wrapper.h2 {
-    font-size: 0.75rem; /* ~12px for small screens */
-    line-height: 1.1;
+    font-size: 0.95rem; /* medium on small screens */
+    line-height: 1.15;
     letter-spacing: 0.01em;
-  }
-  .hero .wrapper .strong {
-    width: 240px;
   }
   .hero-text {
     letter-spacing: 3px;
