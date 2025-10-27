@@ -540,6 +540,7 @@ body.active { overflow: hidden; }
 
 
 
+
 /*-----------------------------------*\
   #HERO
 \*-----------------------------------*/
@@ -549,46 +550,29 @@ body.active { overflow: hidden; }
   text-align: center;
 }
 
-/* Avatar / logo in the hero */
 .hero-banner {
   max-width: 150px;
   margin-inline: auto;
   margin-block-end: 20px;
 }
 
-/* Horizontal titles wrapper */
 .hero .wrapper {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-wrap: wrap;             /* wrap if they don’t fit on one line */
-  gap: 10px 14px;              /* row/column spacing */
-  text-align: center;
-  height: auto;                /* allow natural height */
+  position: relative;
+  text-align: left;
+  height: 1.2em;
   margin-block: 10px 25px;
 }
 
-/* Medium text size for the titles */
-.hero .wrapper.h2 {
-  font-size: clamp(0.95rem, 0.6vw + 0.85rem, 1.125rem); /* ~15–18px */
-  line-height: 1.2;
-  letter-spacing: 0.01em;
-  font-weight: var(--fw-600, 600);
-}
-
-/* Each title shown inline, horizontally */
 .hero .wrapper .strong {
-  position: static;            /* no absolute stacking */
-  top: auto;
-  left: auto;
-  transform: none;
-  width: auto;
-  display: inline-flex;
-  white-space: nowrap;         /* keep each title on one line */
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 300px;
   font-weight: inherit;
+  display: flex;
 }
 
-/* Subtitle beneath the titles */
 .hero-text {
   font-size: var(--fs-10);
   font-weight: var(--fw-300);
@@ -596,60 +580,29 @@ body.active { overflow: hidden; }
   letter-spacing: 5px;
 }
 
-/* Optional spacing node between letter spans (if present) */
-.hero .wrapper .space {
-  padding: 0.1em;
-  width: 0.3em;
-}
+.hero .wrapper .space { padding: 0.1em; }
 
-/* Disable per-letter in/out animation so all titles are visible */
 .hero .wrapper :is(.in, .out) {
-  opacity: 1;
-  transform: none;
-  animation: none;
+  opacity: 0;
+  transform: scaleY(0);
 }
 
-/* Ensure active state doesn't hide anything */
 .hero .strong.active .out {
   opacity: 1;
-  transform: none;
-  animation: none;
+  transform: scaleY(1);
+  animation: textWave 0.2s ease reverse forwards;
 }
 
-/* Keep keyframes in case you switch back to animated mode */
+.hero .wrapper .in { animation: textWave 0.2s ease forwards; }
+
 @keyframes textWave {
-  0% { opacity: 0; transform: scaleY(0); }
-  100% { opacity: 1; transform: scaleY(1); }
-}
-
-
-/*-----------------------------------*\
-  #RESPONSIVE
-\*-----------------------------------*/
-
-/* Tablet */
-@media (max-width: 768px) {
-  .hero {
-    padding-block-start: 96px;
+  0% {
+    opacity: 0;
+    transform: scaleY(0);
   }
-  .hero .wrapper.h2 {
-    font-size: clamp(0.9rem, 0.8vw + 0.7rem, 1.05rem);
-    line-height: 1.18;
-  }
-}
-
-/* Mobile */
-@media (max-width: 480px) {
-  .hero {
-    padding-block-start: 80px;
-  }
-  .hero .wrapper.h2 {
-    font-size: 0.95rem; /* medium on small screens */
-    line-height: 1.15;
-    letter-spacing: 0.01em;
-  }
-  .hero-text {
-    letter-spacing: 3px;
+  100% {
+    opacity: 1;
+    transform: scaleY(1);
   }
 }
 
