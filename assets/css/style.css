@@ -272,11 +272,17 @@ body.active { overflow: hidden; }
   place-content: center;
   color: var(--black);
   transition: var(--transition-2);
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
 }
 
 .btn-icon:is(:hover, :focus-visible) {
   background-color: var(--hover-bg-color, var(--radical-red));
   color: var(--hover-text-color, var(--white));
+}
+
+.btn-icon:active {
+  transform: scale(0.95);
 }
 
 .section-subtitle {
@@ -317,6 +323,8 @@ body.active { overflow: hidden; }
   display: inline-block;
   text-align: center;
   box-shadow: 0 2px 8px hsla(346, 100%, 58%, 0.2);
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
 }
 
 .button:hover {
@@ -326,7 +334,7 @@ body.active { overflow: hidden; }
 }
 
 .button:active {
-  transform: translateY(0);
+  transform: translateY(0) scale(0.98);
   box-shadow: 0 2px 8px hsla(346, 100%, 58%, 0.2);
 }
 
@@ -431,6 +439,8 @@ body.active { overflow: hidden; }
 .nav-close-btn {
   width: 25px;
   height: 25px;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
 }
 
 .nav-close-btn .span {
@@ -447,6 +457,10 @@ body.active { overflow: hidden; }
 
 .nav-close-btn:is(:hover, :focus-visible) .span { background-color: var(--radical-red); }
 
+.nav-close-btn:active {
+  transform: scale(0.9);
+}
+
 .navbar-list {
   text-align: center;
   padding-block: 40px;
@@ -458,9 +472,16 @@ body.active { overflow: hidden; }
   padding-block: 2px;
   text-transform: capitalize;
   transition: var(--transition-1);
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+  display: inline-block;
 }
 
 .navbar-link:is(:hover, :focus-visible) { color: var(--radical-red); }
+
+.navbar-link:active {
+  transform: scale(0.98);
+}
 
 .login-btn {
   display: flex;
@@ -476,6 +497,8 @@ body.active { overflow: hidden; }
   font-weight: var(--fw-500);
   transition: all 0.3s ease;
   box-shadow: 0 2px 8px hsla(346, 100%, 58%, 0.2);
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
 }
 
 .login-btn:hover {
@@ -485,7 +508,7 @@ body.active { overflow: hidden; }
 }
 
 .login-btn:active {
-  transform: translateY(0);
+  transform: translateY(0) scale(0.98);
 }
 
 .navbar-title {
@@ -558,9 +581,34 @@ body.active { overflow: hidden; }
 [data-theme="dark"] .sun-icon { opacity: 1; }
 
 /* nav-open button to the right */
-.nav-open-btn { margin-left: auto; z-index: 6; }
+.nav-open-btn { 
+  margin-left: auto; 
+  z-index: 6;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+  padding: 8px;
+  min-width: 44px;
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.nav-open-btn:active {
+  transform: scale(0.95);
+}
+
+.theme-toggle {
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+  transition: all 0.3s ease;
+}
 
 .theme-toggle:hover { background-color: var(--white_a15); }
+
+.theme-toggle:active {
+  transform: scale(0.95);
+}
 
 
 
@@ -668,9 +716,14 @@ body.active { overflow: hidden; }
   font-weight: var(--fw-400);
   max-width: max-content;
   margin-block-end: 2px;
+  -webkit-tap-highlight-color: transparent;
 }
 
 .gallery-card .card-title:is(:hover, :focus-visible) { text-decoration: underline; }
+
+.gallery-card .card-title:active {
+  transform: scale(0.98);
+}
 
 .gallery-card .btn-icon {
   top: 0;
@@ -887,12 +940,18 @@ body.active { overflow: hidden; }
   justify-content: center;
   gap: 8px;
   cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
 }
 
 .toggle-btn:is(:hover, :focus-visible) {
   border-color: rgba(255,255,255,0.08);
   background-color: rgba(255,255,255,0.02);
   transform: translateY(-1px);
+}
+
+.toggle-btn:active {
+  transform: scale(0.97);
 }
 
 .toggle-btn.active {
@@ -1379,11 +1438,18 @@ body.active { overflow: hidden; }
 .social-link { 
   font-weight: var(--fw-500);
   color: var(--white_a70);
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+  transition: all 0.3s ease;
 }
 
 .social-link:is(:hover, :focus-visible) { 
   text-decoration: underline;
   color: var(--white);
+}
+
+.social-link:active {
+  transform: scale(0.95);
 }
 
 .copyright {
@@ -1464,11 +1530,17 @@ body.active { overflow: hidden; }
   font-weight: 500;
   transition: all 0.3s ease;
   border-radius: var(--radius-5);
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
 }
 
 .contact__button:hover {
   background-color: var(--white_a9);
   transform: translateY(-1px);
+}
+
+.contact__button:active {
+  transform: translateY(0) scale(0.98);
 }
 
 .contact__button:hover .contact__button-icon {
@@ -1576,7 +1648,59 @@ body.active { overflow: hidden; }
 \*-----------------------------------*/
 
 /**
+ * responsive for very small mobile screens (below 375px)
+ */
+@media (max-width: 374px) {
+  :root {
+    --fs-1: 4.5rem;
+    --fs-2: 4rem;
+    --fs-3: 3rem;
+    --fs-4: 2.2rem;
+    --section-padding: 50px;
+  }
+
+  .container {
+    padding-inline: 16px;
+  }
+
+  .hero-title {
+    font-size: 4rem;
+  }
+
+  .btn-icon {
+    --size: 44px;
+  }
+
+  .button {
+    padding: 12px 24px;
+    font-size: 1.4rem;
+  }
+
+  .navbar-link {
+    font-size: 1.8rem;
+  }
+
+  .category-card .card-title {
+    font-size: 2rem;
+  }
+
+  .service-card {
+    padding: 16px 8px;
+  }
+
+  .contact__form-input {
+    font-size: 1.5rem;
+  }
+
+  .skill-card {
+    min-width: 56px;
+    min-height: 56px;
+  }
+}
+
+/**
  * responsive for mobile screens (below 575px)
+ * Optimized for touch interactions and mobile devices
  */
 @media (max-width: 574px) {
   .hero-banner {
@@ -1601,6 +1725,98 @@ body.active { overflow: hidden; }
 
   .footer-top {
     padding-block: 80px 100px;
+  }
+
+  /* Enhanced touch targets for mobile */
+  .btn-icon {
+    --size: 48px;
+    min-width: 48px;
+    min-height: 48px;
+  }
+
+  .button {
+    padding: 14px 32px;
+    min-height: 48px;
+    font-size: 1.6rem;
+  }
+
+  .nav-open-btn,
+  .nav-close-btn {
+    min-width: 48px;
+    min-height: 48px;
+    padding: 12px;
+  }
+
+  .theme-toggle {
+    min-width: 44px;
+    min-height: 44px;
+    padding: 10px;
+  }
+
+  /* Better spacing for touch */
+  .navbar-link {
+    padding: 16px 0;
+    font-size: 2rem;
+  }
+
+  .login-btn {
+    padding: 14px 24px;
+    min-height: 48px;
+  }
+
+  /* Improved form inputs for mobile */
+  .contact__form-input {
+    padding: 16px;
+    font-size: 1.6rem;
+    min-height: 48px;
+  }
+
+  /* Better link spacing */
+  .social-link {
+    padding: 12px 8px;
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+  }
+
+  /* Skill cards touch optimization */
+  .skill-card {
+    padding: 12px;
+    min-width: 64px;
+    min-height: 64px;
+  }
+
+  .toggle-btn {
+    padding: 12px 24px;
+    min-height: 48px;
+    font-size: 1.5rem;
+  }
+
+  /* Gallery cards - better touch area */
+  .gallery-card .card-title {
+    font-size: 1.8rem;
+  }
+
+  .category-card .card-title {
+    font-size: 2.4rem;
+  }
+
+  /* Certification cards */
+  .certification-card-link {
+    padding: 16px;
+  }
+
+  /* Contact cards */
+  .contact__card {
+    padding: 20px;
+  }
+
+  .contact__button {
+    padding: 12px 20px;
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
   }
 }
 
@@ -1739,6 +1955,81 @@ body.active { overflow: hidden; }
   }
   .copyright { order: 0; grid-column: 2 / 3; width: auto; margin: 0; }
   .social-list { justify-content: flex-end; }
+
+  /* Tablet touch optimizations */
+  .btn-icon {
+    --size: 52px;
+    min-width: 52px;
+    min-height: 52px;
+  }
+
+  .button {
+    padding: 15px 36px;
+    min-height: 50px;
+  }
+
+  .toggle-btn {
+    padding: 14px 28px;
+    min-height: 50px;
+    font-size: 1.6rem;
+  }
+
+  /* Better touch targets for navigation */
+  .navbar-link {
+    padding: 18px 0;
+  }
+
+  /* Form optimization for tablet */
+  .contact__form-input {
+    padding: 18px;
+    font-size: 1.7rem;
+  }
+
+  /* Skill cards for tablet */
+  .skill-card {
+    padding: 16px;
+    min-width: 80px;
+    min-height: 80px;
+    transition: transform 0.3s ease;
+  }
+
+  .skill-card:hover {
+    transform: translateY(-5px);
+  }
+
+  /* Gallery improvements for tablet */
+  .gallery-card {
+    transition: transform 0.3s ease;
+  }
+
+  .gallery-card:hover {
+    transform: translateY(-8px);
+  }
+
+  /* Service cards spacing */
+  .service-card {
+    padding: 30px 20px;
+  }
+
+  /* Portfolio cards */
+  .portfolio-card .card-content {
+    padding: 20px 16px;
+  }
+
+  /* Contact cards for tablet */
+  .contact__card {
+    padding: 24px;
+    transition: transform 0.3s ease;
+  }
+
+  .contact__card:hover {
+    transform: translateY(-5px);
+  }
+
+  .contact__button {
+    padding: 14px 24px;
+    min-height: 48px;
+  }
 }
 
 
