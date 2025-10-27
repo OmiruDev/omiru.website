@@ -175,73 +175,112 @@ if (cursor) {
 }
 
 // SKILLS & EDUCATION SECTIONS TOGGLE
-const initializeToggleSection = (section) => {
+const initializeToggleSection = (section, options = {}) => {
   const toggleBox = section.querySelector('[data-toggle-box]');
-  const toggleBtns = toggleBox ? Array.from(toggleBox.querySelectorAll('[data-toggle-btn]')) : [];
+  if (!toggleBox) { return; }
 
-  if (!toggleBtns.length) return;
+  const toggleBtns = Array.from(toggleBox.querySelectorAll('[data-toggle-btn]'));
+  if (!toggleBtns.length) { return; }
 
-  const setActive = (index) => {
-    toggleBtns.forEach((btn, i) => btn.classList.toggle('active', i === index));
-    
-    // Specific logic for each section
-    if (section.matches('#skills')) {
-      const skillsBox = section.querySelector('[data-skills-box]');
-      if (skillsBox) skillsBox.classList.toggle('active', index === 1);
-    } else if (section.matches('#education')) {
-      const qualList = section.querySelector('.qualification-list');
-      const certList = section.querySelector('.certification-list');
-      const loadMoreBtn = section.querySelector('[data-load-more-certs]');
-      
-      if (qualList) qualList.classList.toggle('active', index === 0);
-      if (certList) certList.classList.toggle('active', index === 1);
-      if (loadMoreBtn) loadMoreBtn.style.display = index === 1 ? 'inline-block' : 'none';
+  const {
+    defaultIndex = 0,
+    onToggle,
+    toggleContainerActiveClass = null,
+    toggleContainerActiveIndex = 1
+  } = options;
+
+  const setActiveState = (activeIndex) => {
+    toggleBtns.forEach((btn, index) => {
+      const isActive = index === activeIndex;
+      btn.classList.toggle('active', isActive);
+      btn.setAttribute('aria-pressed', isActive ? 'true' : 'false');
+    });
+
+    if (toggleContainerActiveClass) {
+      toggleBox.classList.toggle(toggleContainerActiveClass, activeIndex === toggleContainerActiveIndex);
+    }
+
+    if (typeof onToggle === 'function') {
+      onToggle(activeIndex);
     }
   };
 
-  toggleBtns.forEach((btn, i) => btn.addEventListener('click', () => setActive(i)));
+  toggleBtns.forEach((btn, index) => {
+    btn.addEventListener('click', () => setActiveState(index));
+    btn.addEventListener('keydown', (event) => {
+      if (event.key === 'Enter' || event.key === ' ') {
+        event.preventDefault();
+        setActiveState(index);
+      }
+    });
+  });
 
-  // Set initial state
-  const initialIndex = toggleBtns.findIndex(b => b.classList.contains('active'));
-  setActive(initialIndex >= 0 ? initialIndex : 0);
+  setActiveState(defaultIndex);
 };
 
 // Initialize Skills Section
 const skillsSection = document.querySelector('#skills');
 if (skillsSection) {
-  initializeToggleSection(skillsSection);
-  const skillCards = skillsSection.querySelectorAll('.skill-card');
-  skillCards.forEach(card => {
-    card.addEventListener('mouseenter', () => card.classList.add('touched'));
-    card.addEventListener('mouseleave', () => card.classList.remove('touched'));
+  const skillsBox = skillsSection.querySelector('[data-skills-box]');
+  const skillsList = skillsBox?.querySelector('.skills-list');
+  const toolsList = skillsBox?.querySelector('.tools-list');
+
+  initializeToggleSection(skillsSection, {
+    defaultIndex: 0,
+    toggleContainerActiveClass: 'active',
+    toggleContainerActiveIndex: 1,
+    onToggle: (activeIndex) => {
+      const showTools = activeIndex === 1;
+
+      if (skillsBox) {
+        skillsBox.classList.toggle('active', showTools);
+      }
+
+      if (skillsList) {
+        skillsList.setAttribute('aria-hidden', showTools ? 'true' : 'false');
+      }
+
+      if (toolsList) {
+        toolsList.setAttribute('aria-hidden', showTools ? 'false' : 'true');
+      }
+    }
   });
 }
 
 // Initialize Education Section
 const educationSection = document.querySelector('#education');
 if (educationSection) {
-  initializeToggleSection(educationSection);
-  
-  // Load More functionality for Certifications
+  const qualificationList = educationSection.querySelector('.qualification-list');
+  const certificationList = educationSection.querySelector('.certification-list');
   const loadMoreBtn = educationSection.querySelector('[data-load-more-certs]');
-  const certList = educationSection.querySelector('.certification-list');
-  
-  if (loadMoreBtn && certList) {
-    const hiddenCerts = Array.from(certList.querySelectorAll('.hidden-cert'));
-    let isExpanded = false;
 
-    const toggleCerts = () => {
-      isExpanded = !isExpanded;
-      hiddenCerts.forEach(cert => {
-        cert.style.display = isExpanded ? 'block' : 'none';
-      });
-      loadMoreBtn.textContent = isExpanded ? 'Show Less' : 'Load More';
-    };
+  initializeToggleSection(educationSection, {
+    defaultIndex: 0,
+    onToggle: (activeIndex) => {
+      const showCerts = activeIndex === 1;
 
-    // Initially hide the extra certs and set button text
-    hiddenCerts.forEach(cert => cert.style.display = 'none');
-    loadMoreBtn.textContent = 'Load More';
+      if (qualificationList) {
+        qualificationList.classList.toggle('active', !showCerts);
+        qualificationList.setAttribute('aria-hidden', showCerts ? 'true' : 'false');
+      }
 
-    loadMoreBtn.addEventListener('click', toggleCerts);
+      if (certificationList) {
+        certificationList.classList.toggle('active', showCerts);
+        certificationList.setAttribute('aria-hidden', showCerts ? 'false' : 'true');
+      }
+
+      if (loadMoreBtn) {
+        loadMoreBtn.style.display = showCerts ? 'inline-flex' : 'none';
+      }
+    }
+  });
+
+  if (loadMoreBtn) {
+    loadMoreBtn.addEventListener('click', () => {
+      educationSection
+        .querySelectorAll('.certification-list .hidden-cert')
+        .forEach((item) => item.classList.remove('hidden-cert'));
+      loadMoreBtn.style.display = 'none';
+    });
   }
 }
