@@ -1058,20 +1058,32 @@ body.active { overflow: hidden; }
   border-radius: var(--radius-12);
   border: 1px solid var(--white_a15);
   transition: var(--transition-2);
+  display: flex;
+  gap: 20px;
+  align-items: flex-start;
 }
 
 .qualification-card .card-logo {
-  width: 100%;
-  max-width: 180px;
-  margin-block-end: 20px;
+  width: 120px;
+  min-width: 120px;
+  height: 120px;
   border-radius: 8px;
   overflow: hidden;
+  background: var(--white);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
 }
 
 .qualification-card .card-logo img {
   width: 100%;
   height: 100%;
   object-fit: contain;
+}
+
+.qualification-card .card-content {
+  flex: 1;
 }
 
 .qualification-card .card-title {
@@ -1092,8 +1104,30 @@ body.active { overflow: hidden; }
   display: block;
 }
 
+@media (max-width: 576px) {
+  .qualification-card {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+  
+  .qualification-card .card-logo {
+    width: 150px;
+    min-width: 150px;
+    height: 150px;
+  }
+}
+
 .certification-list {
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  grid-template-columns: repeat(2, 1fr);
+  max-width: 800px;
+  margin-inline: auto;
+}
+
+@media (max-width: 768px) {
+  .certification-list {
+    grid-template-columns: 1fr;
+  }
 }
 
 .certification-card-link {
@@ -1108,7 +1142,7 @@ body.active { overflow: hidden; }
 
 .certification-card-link .card-banner {
   width: 100%;
-  aspect-ratio: 16 / 9;
+  aspect-ratio: 3 / 2;
 }
 
 .certification-card-link .card-banner img {
@@ -1135,21 +1169,25 @@ body.active { overflow: hidden; }
 }
 
 .load-more {
-  background-color: var(--eerie-black);
+  background-color: var(--radical-red);
   color: var(--white);
   font-size: var(--fs-9);
   font-weight: var(--fw-500);
-  padding: 12px 24px;
-  border-radius: 6px;
-  border: 1px solid var(--white_a15);
+  padding: 14px 32px;
+  border-radius: var(--radius-5);
+  border: none;
   margin-inline: auto;
   margin-block-start: 40px;
   transition: var(--transition-1);
-  display: none; /* Initially hidden */
+  display: none;
+  cursor: pointer;
+  box-shadow: 0 3px 10px hsla(346, 100%, 58%, 0.3);
 }
 
 .load-more:hover {
-  background-color: var(--radical-red);
+  background-color: hsl(346, 100%, 68%);
+  box-shadow: 0 5px 15px hsla(346, 100%, 58%, 0.4);
+  transform: translateY(-2px);
 }
 
 .certification-list .hidden-cert {
