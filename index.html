@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover" />
 
   <!-- 
     - primary meta tags
@@ -27,7 +27,8 @@
     - custom font link
   -->
   <link rel="stylesheet" href="./assets/font/font.css">
-
+  <!-- Add boxicons for footer contact icons -->
+  <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
   <!-- 
     - preload images
   -->
@@ -56,96 +57,96 @@
   -->
 
   <header class="header" data-header>
-    <div class="container">
+  <div class="container">
 
-      <a href="#" class="logo">
-        <img src="./assets/images/logo.svg" width="40" height="40" alt="Richard home">
-      </a>
+    <a href="#" class="logo">
+      <img src="./assets/images/logo.svg" width="40" height="40" alt="Omiru home">
+    </a>
 
-      <!-- Theme toggle (centered) -->
-      <button class="theme-toggle" aria-label="toggle theme" data-theme-toggle>
-        <!-- sun -->
-        <svg class="sun-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
-          stroke="currentColor">
-          <circle cx="12" cy="12" r="5" />
-          <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"
-            stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" />
-        </svg>
-        <!-- moon -->
-        <svg class="moon-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
-          stroke="currentColor">
-          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" stroke-width="1.6" stroke-linecap="round"
-            stroke-linejoin="round" />
-        </svg>
-      </button>
+    <!-- Theme toggle (centered) -->
+    <button class="theme-toggle" aria-label="toggle theme" data-theme-toggle>
+      <!-- sun -->
+      <svg class="sun-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+        stroke="currentColor">
+        <circle cx="12" cy="12" r="5" />
+        <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"
+          stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" />
+      </svg>
+      <!-- moon -->
+      <svg class="moon-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+        stroke="currentColor">
+        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" stroke-width="1.6" stroke-linecap="round"
+          stroke-linejoin="round" />
+      </svg>
+    </button>
 
-      <button class="nav-open-btn" aria-label="open menu" data-nav-toggler>
-        <img src="./assets/images/menu.svg" width="17" height="17" alt="menu icon">
-      </button>
+    <button class="nav-open-btn" aria-label="open menu" data-nav-toggler>
+      <img src="./assets/images/menu.svg" width="17" height="17" alt="menu icon">
+    </button>
 
-      <nav class="navbar" data-navbar>
+    <nav class="navbar" data-navbar>
 
-        <div class="navbar-top">
-          <a href="#" class="logo">
-            <img src="./assets/images/nav-logo.svg" width="140" height="40" alt="Richard home" class="img">
-          </a>
+      <div class="navbar-top">
+        <a href="#" class="logo">
+          <img src="./assets/images/nav-logo.svg" width="140" height="40" alt="Omiru home" class="img">
+        </a>
 
-          <button class="nav-close-btn" aria-label="close menu" data-nav-toggler>
-            <span class="span one"></span>
-            <span class="span two"></span>
-          </button>
-        </div>
-
-        <ul class="navbar-list">
-
-          <li class="navbar-item">
-            <a href="#home" class="navbar-link" data-nav-link>Home</a>
-          </li>
-
-          <li class="navbar-item">
-            <a href="#gallery" class="navbar-link" data-nav-link>Gallery</a>
-          </li>
-
-          <li class="navbar-item">
-            <a href="#about" class="navbar-link" data-nav-link>About</a>
-          </li>
-
-          <li class="navbar-item">
-            <a href="#services" class="navbar-link" data-nav-link>Services</a>
-          </li>
-
-          <li class="navbar-item">
-            <a href="#portfolio" class="navbar-link" data-nav-link>Portfolio</a>
-          </li>
-
-          <li class="navbar-item">
-            <a href="#contact" class="navbar-link" data-nav-link>Contact us</a>
-          </li>
-
-        </ul>
-
-        <button class="login-btn">
-          <img src="./assets/images/user.svg" width="21" height="21" alt="user icon">
-
-          <span class="span">Login</span>
+        <button class="nav-close-btn" aria-label="close menu" data-nav-toggler>
+          <span class="span one"></span>
+          <span class="span two"></span>
         </button>
+      </div>
 
-        <p class="navbar-title">My Address</p>
+      <ul class="navbar-list">
 
-        <address class="navbar-text">
-          Chilaw, Puttalam, Sri Lanka
-        </address>
+        <li class="navbar-item">
+          <a href="#home" class="navbar-link" data-nav-link>Home</a>
+        </li>
 
-        <p class="navbar-text">
-          Urgent issue? call us at
-          <a href="tel:0772602443" class="contact-link">0772602443</a>
-        </p>
+        <li class="navbar-item">
+          <a href="#gallery" class="navbar-link" data-nav-link>Gallery</a>
+        </li>
 
-      </nav>
+        <li class="navbar-item">
+          <a href="#about" class="navbar-link" data-nav-link>About</a>
+        </li>
 
-      <div class="overlay" data-nav-toggler data-overlay></div>
+        <li class="navbar-item">
+          <a href="#services" class="navbar-link" data-nav-link>Services</a>
+        </li>
 
-    </div>
+        <li class="navbar-item">
+          <a href="#portfolio" class="navbar-link" data-nav-link>Portfolio</a>
+        </li>
+
+        <li class="navbar-item">
+          <a href="#contact" class="navbar-link" data-nav-link>Contact us</a>
+        </li>
+
+      </ul>
+
+      <button class="login-btn">
+        <img src="./assets/images/user.svg" width="21" height="21" alt="user icon">
+
+        <span class="span">Login</span>
+      </button>
+
+      <p class="navbar-title">My Address</p>
+
+      <address class="navbar-text">
+        Chilaw, Puttalam, Sri Lanka
+      </address>
+
+      <p class="navbar-text">
+        Urgent issue? call us at
+        <a href="tel:0772602443" class="contact-link">0772602443</a>
+      </p>
+
+    </nav>
+
+    <div class="overlay" data-nav-toggler data-overlay></div>
+
+  </div>
   </header>
 
 
@@ -172,7 +173,7 @@
               <strong class="strong" data-letter-effect>Multimedia</strong>
               <strong class="strong" data-letter-effect>Designer</strong>
               <strong class="strong" data-letter-effect>Developer</strong>
-              <strong class="strong" data-letter-effect>Creater</strong>
+              <strong class="strong" data-letter-effect>Creator</strong>
               <strong class="strong" data-letter-effect>Animator</strong>
               <strong class="strong" data-letter-effect>Producer</strong>
               <strong class="strong" data-letter-effect></strong>
@@ -395,7 +396,7 @@
 
           </ul>
 
-          <a href="#service" class="scroll-down">
+          <a href="#services" class="scroll-down">
             <img src="./assets/images/scroll-down.svg" width="40" height="66" loading="lazy" alt="mouse scroll">
           </a>
 
@@ -576,11 +577,11 @@
             <li class="category-item" data-reveal>
               <a href="#" class="category-card">
 
-                <h3 class="h4 card-title">Health & Wellnes.</h3>
+                <h3 class="h4 card-title">Health & Wellness.</h3>
 
                 <figure class="card-banner img-holder" style="--width: 600; --height: 690;">
                   <img src="./assets/images/category-11.jpg" width="600" height="690" loading="lazy"
-                    alt="Health & Wellnes" class="img-cover">
+                    alt="Health & Wellness" class="img-cover">
                 </figure>
 
               </a>
@@ -610,18 +611,15 @@
             </h2>
 
             <div class="wrapper has-before" data-reveal="right">
-
               <p class="section-text">
                 A passionate
-                <em class="em">photograher</em>
-                who are working in this field for
+                <em class="em">photographer</em>
+                who has been working in this field for the
                 <em class="em">last 2 years.</em>
                 I’m ready to give you my best.
               </p>
-
               <img src="./assets/images/signature.png" width="151" height="92" loading="lazy" alt="signature"
                 class="img">
-
             </div>
 
           </div>
@@ -629,7 +627,7 @@
           <figure class="about-banner" data-reveal="left">
 
             <div class="img-holder has-before" style="--width: 512; --height: 684;">
-              <img src="./assets/images/about-banner.png" width="512" height="684" loading="lazy" alt="Riachard Ryan"
+              <img src="./assets/images/about-banner.png" width="512" height="684" loading="lazy" alt="Omiru Ranshan"
                 class="img-cover">
             </div>
 
@@ -646,11 +644,10 @@
 
         </div>
       </section>
-
       <!--=============== SKILLS ===============-->
       <section class="skills" id="skills">
         <div class="skills-content section-content">
-          <p class="section-subtitle container" id="service-lable">My skills</p>
+          <p class="section-subtitle container" id="skills-section-label">My skills</p>
           <h3 class="h3 card-title" style="text-align: center;">What My Programming Skills Included?</h3>
           <div class="skills-toggle" data-toggle-box>
             <button class="toggle-btn active" data-toggle-btn>Skills</button>
@@ -940,8 +937,7 @@
 
       <section class="education" id="education">
         <div class="education-content section-content">
-      
-          <p class="section-subtitle container" id="service-lable">My Education</p>
+          <p class="section-subtitle container" id="education-section-label">My Education</p>
           <h3 class="h3 card-title" style="text-align: center;">My Qualifications & Certifications</h3>
       
           <div class="education-toggle" data-toggle-box>
@@ -998,9 +994,8 @@
         - #SERVICE
       -->
 
-      <section class="section service" id="services" aria-labelledby="service-lable">
-
-        <p class="section-subtitle container" id="service-lable">My Services</p>
+      <section class="section service" id="services" aria-labelledby="services-label">
+        <p class="section-subtitle container" id="services-label">My Services</p>
         
 
         <ul class="service-list">
@@ -1200,13 +1195,13 @@
               <div class="portfolio-card" data-reveal>
 
                 <figure class="card-banner img-holder has-before" style="--width: 700; --height: 850;">
-                  <img src="./assets/images/portfolio-4.jpg" width="700" height="850" loading="lazy" alt="Jumbo Barger"
+                  <img src="./assets/images/portfolio-4.jpg" width="700" height="850" loading="lazy" alt="Jumbo Burger"
                     class="img-cover">
                 </figure>
 
                 <div class="card-content">
                   <h3 class="h4">
-                    <a href="#" class="card-title">Jumbo Barger</a>
+                    <a href="#" class="card-title">Jumbo Burger</a>
                   </h3>
 
                   <p class="card-tag">Food</p>
@@ -1262,7 +1257,7 @@
                             <h3 class="contact__card-title">Email</h3>
                             <span class="contact__card-data">omiruonline@gmail.com</span>
 
-                            <a href="mailto:example@domain.com" target="_blank" class="contact__button">
+                            <a href="mailto:omiruonline@gmail.com" target="_blank" class="contact__button">
                                 Write Me <i class='bx bx-right-arrow contact__button-icon'></i>
                             </a>
                         </div>
@@ -1385,6 +1380,8 @@
   -->
   <script src="./assets/js/script.js"></script>
 
+  <!-- Touch helpers -->
+  <script src="./assets/js/mobile-touch.js" defer></script>
 </body>
 
 </html>
