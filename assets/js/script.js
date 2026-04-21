@@ -403,6 +403,7 @@ if (toolsBtnLink) {
   let height = 0;
   let dpr = 1;
   let fontSize = 16;
+  let colGap = 18;
   let columns = 0;
   let drops = [];
   let speeds = [];
@@ -411,6 +412,8 @@ if (toolsBtnLink) {
 
   const FPS = 20; // slow rain to match Matrix reference style
   const FRAME_MS = 1000 / FPS;
+  const MAX_OFFSCREEN_OFFSET = 20; // max extra rows a column starts above the canvas
+  const MIN_OFFSCREEN_OFFSET = 2;  // min rows above the canvas on reset
 
   const setupCanvas = () => {
     dpr = Math.max(1, Math.min(2, window.devicePixelRatio || 1));
@@ -426,7 +429,7 @@ if (toolsBtnLink) {
 
     // Column gap slightly larger than font so characters breathe
     fontSize = width < 575 ? 13 : width < 992 ? 15 : 17;
-    const colGap = fontSize + 2;
+    colGap = fontSize + 2;
     columns = Math.max(1, Math.floor(width / colGap));
 
     // Stagger start positions so the screen fills immediately
@@ -477,7 +480,7 @@ if (toolsBtnLink) {
 
       // Reset column after it exits the bottom; some start off-screen for variety
       if (y > height + Math.random() * 200) {
-        drops[i] = -(Math.random() * 20 + 2);
+        drops[i] = -(Math.random() * MAX_OFFSCREEN_OFFSET + MIN_OFFSCREEN_OFFSET);
         speeds[i] = 0.28 + Math.random() * 0.28;
       }
     }
