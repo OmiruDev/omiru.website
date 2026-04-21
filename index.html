@@ -18,10 +18,35 @@
   -->
   <link rel="shortcut icon" href="./favicon.svg" type="image/svg+xml">
 
+  <script>
+    (() => {
+      const storageKey = 'theme';
+      const prefersLight = window.matchMedia('(prefers-color-scheme: light)').matches;
+
+      try {
+        const savedTheme = localStorage.getItem(storageKey);
+        const theme = savedTheme === 'light' || savedTheme === 'dark'
+          ? savedTheme
+          : (prefersLight ? 'light' : 'dark');
+
+        document.documentElement.setAttribute('data-theme', theme);
+        document.documentElement.style.colorScheme = theme;
+      } catch (error) {
+        const fallbackTheme = prefersLight ? 'light' : 'dark';
+        document.documentElement.setAttribute('data-theme', fallbackTheme);
+        document.documentElement.style.colorScheme = fallbackTheme;
+      }
+    })();
+  </script>
+
   <!-- 
     - custom CSS link
   -->
   <link rel="stylesheet" href="./assets/css/style.css">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;700&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
 
   <!-- 
     - custom font link
@@ -36,9 +61,6 @@
   <link rel="preload" as="image" href="./assets/images/loading-circle.svg">
 
 
-  <!-- Google AdSense -->
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7682900258714848"
-     crossorigin="anonymous"></script>
 
   
 </head>
@@ -79,8 +101,6 @@
     <a
       class="shop-btn header-icon"
       href="#"
-      target="_blank"
-      rel="noopener noreferrer"
       aria-label="Open shop"
       title="Shop"
     >
@@ -192,18 +212,14 @@
             <h1 class="h1 hero-title">Omiru Ranshan</h1>
 
             <div class="wrapper h2">
-              <strong class="strong" data-letter-effect>Full Stack Developer</strong>
-              <strong class="strong" data-letter-effect>UI/UX Designer</strong>
-              <strong class="strong" data-letter-effect>Web Developer</strong>
-              <strong class="strong" data-letter-effect>Multimedia Creator</strong>
-              <strong class="strong" data-letter-effect>Graphic Designer</strong>
-              <strong class="strong" data-letter-effect>Web Designer</strong>
-              <strong class="strong" data-letter-effect>Content Creator</strong>
-              <strong class="strong" data-letter-effect>3D Animator</strong>
-              <strong class="strong" data-letter-effect>Video Producer</strong>
-              <strong class="strong" data-letter-effect>Audio Engineer</strong>
-              <strong class="strong" data-letter-effect>Game Developer</strong>
-              <strong class="strong" data-letter-effect>Photographer</strong>
+              <strong class="strong" data-letter-effect>Cyber Security Engineer</strong>
+              <strong class="strong" data-letter-effect>Cyber Security Analyst</strong>
+              <strong class="strong" data-letter-effect>Ethical Hacker</strong>
+              <strong class="strong" data-letter-effect>Penetration Tester</strong>
+              <strong class="strong" data-letter-effect>SOC Analyst</strong>
+              <strong class="strong" data-letter-effect>Network Security Engineer</strong>
+              <strong class="strong" data-letter-effect>Digital Forensics Specialist</strong>
+              <strong class="strong" data-letter-effect>AI/ML Engineer</strong>
 
 
             </div>
@@ -227,402 +243,305 @@
       -->
 
       <section class="section gallery" id="gallery">
-        <div class="container">
+  <div class="container">
 
-          <ul class="gallery-list">
+    <ul class="gallery-list">
 
-            <li class="gallery-item" data-reveal>
+      <li class="gallery-item" data-reveal>
 
-              <div class="gallery-card">
+        <!-- Project 1 -->
+        <div class="gallery-card">
+          <figure class="card-banner img-holder has-before">
+            <img src="./assets/images/gallery-1.png" loading="lazy" alt="Cybersecurity Dashboard" class="img-cover">
+          </figure>
 
-                <figure class="card-banner img-holder has-before" style="--width: 450; --height: 625;">
-                  <img src="./assets/images/gallery-1.jpg" width="450" height="625" loading="lazy" alt="The Drunken"
-                    class="img-cover">
-                </figure>
+          <div class="card-content">
+            <h3 class="h6">
+              <a href="#" class="card-title">Cybersecurity Dashboard</a>
+            </h3>
+            <span class="card-tag">Security Analysis</span>
+          </div>
 
-                <div class="card-content">
-                  <h3 class="h6">
-                    <a href="#" class="card-title">MY BRAND</a>
-                  </h3>
-
-                  <span class="card-tag">COLOUR</span>
-                </div>
-
-                <a href="#" class="btn-icon">
-                  <img src="./assets/images/arrow-forward.svg" width="43" height="20" loading="lazy"
-                    alt="arrow-forward icon">
-                </a>
-
-              </div>
-
-              <div class="gallery-card">
-
-                <figure class="card-banner img-holder has-before" style="--width: 450; --height: 625;">
-                  <img src="./assets/images/gallery-2.jpg" width="450" height="625" loading="lazy"
-                    alt="Lettuce Entertain" class="img-cover">
-                </figure>
-
-                <div class="card-content">
-                  <h3 class="h6">
-                    <a href="#" class="card-title">Lettuce Entertain</a>
-                  </h3>
-
-                  <span class="card-tag">Landscape</span>
-                </div>
-
-                <a href="#" class="btn-icon">
-                  <img src="./assets/images/arrow-forward.svg" width="43" height="20" loading="lazy"
-                    alt="arrow-forward icon">
-                </a>
-
-              </div>
-
-            </li>
-
-            <li class="gallery-item" data-reveal>
-
-              <div class="gallery-card">
-
-                <figure class="card-banner img-holder has-before" style="--width: 450; --height: 625;">
-                  <img src="./assets/images/gallery-3.jpg" width="450" height="625" loading="lazy" alt="Leaping Lizard"
-                    class="img-cover">
-                </figure>
-
-                <div class="card-content">
-                  <h3 class="h6">
-                    <a href="#" class="card-title">Leaping Lizard</a>
-                  </h3>
-
-                  <span class="card-tag">Model, Fashion</span>
-                </div>
-
-                <a href="#" class="btn-icon">
-                  <img src="./assets/images/arrow-forward.svg" width="43" height="20" loading="lazy"
-                    alt="arrow-forward icon">
-                </a>
-
-              </div>
-
-              <div class="gallery-card">
-
-                <figure class="card-banner img-holder has-before" style="--width: 450; --height: 625;">
-                  <img src="./assets/images/gallery-4.jpg" width="450" height="625" loading="lazy" alt="Juan More Taco"
-                    class="img-cover">
-                </figure>
-
-                <div class="card-content">
-                  <h3 class="h6">
-                    <a href="#" class="card-title">Juan More Taco</a>
-                  </h3>
-
-                  <span class="card-tag">Architecture, Event</span>
-                </div>
-
-                <a href="#" class="btn-icon">
-                  <img src="./assets/images/arrow-forward.svg" width="43" height="20" loading="lazy"
-                    alt="arrow-forward icon">
-                </a>
-
-              </div>
-
-            </li>
-
-            <li class="gallery-item" data-reveal>
-
-              <div class="gallery-card">
-
-                <figure class="card-banner img-holder has-before" style="--width: 450; --height: 625;">
-                  <img src="./assets/images/gallery-5.jpg" width="450" height="625" loading="lazy" alt="Goldilox Bagels"
-                    class="img-cover">
-                </figure>
-
-                <div class="card-content">
-                  <h3 class="h6">
-                    <a href="#" class="card-title">Goldilox Bagels</a>
-                  </h3>
-
-                  <span class="card-tag">People, Film</span>
-                </div>
-
-                <a href="#" class="btn-icon">
-                  <img src="./assets/images/arrow-forward.svg" width="43" height="20" loading="lazy"
-                    alt="arrow-forward icon">
-                </a>
-
-              </div>
-
-              <div class="gallery-card">
-
-                <figure class="card-banner img-holder has-before" style="--width: 450; --height: 625;">
-                  <img src="./assets/images/gallery-6.jpg" width="450" height="625" loading="lazy" alt="Cookie Monstah"
-                    class="img-cover">
-                </figure>
-
-                <div class="card-content">
-                  <h3 class="h6">
-                    <a href="#" class="card-title">Cookie Monstah</a>
-                  </h3>
-
-                  <span class="card-tag">Wedding, Event</span>
-                </div>
-
-                <a href="#" class="btn-icon">
-                  <img src="./assets/images/arrow-forward.svg" width="43" height="20" loading="lazy"
-                    alt="arrow-forward icon">
-                </a>
-
-              </div>
-
-            </li>
-
-            <li class="gallery-item" data-reveal>
-
-              <div class="gallery-card">
-
-                <figure class="card-banner img-holder has-before" style="--width: 450; --height: 625;">
-                  <img src="./assets/images/gallery-7.jpg" width="450" height="625" loading="lazy"
-                    alt="Divine Pastabilities" class="img-cover">
-                </figure>
-
-                <div class="card-content">
-                  <h3 class="h6">
-                    <a href="#" class="card-title">Divine Pastabilities</a>
-                  </h3>
-
-                  <span class="card-tag">Wedding, Model</span>
-                </div>
-
-                <a href="#" class="btn-icon">
-                  <img src="./assets/images/arrow-forward.svg" width="43" height="20" loading="lazy"
-                    alt="arrow-forward icon">
-                </a>
-
-              </div>
-
-              <div class="gallery-card">
-
-                <figure class="card-banner img-holder has-before" style="--width: 450; --height: 625;">
-                  <img src="./assets/images/gallery-8.jpg" width="450" height="625" loading="lazy"
-                    alt="The Lockhart Bar" class="img-cover">
-                </figure>
-
-                <div class="card-content">
-                  <h3 class="h6">
-                    <a href="#" class="card-title">The Lockhart Bar</a>
-                  </h3>
-
-                  <span class="card-tag">Health & Wellnes</span>
-                </div>
-
-                <a href="#" class="btn-icon">
-                  <img src="./assets/images/arrow-forward.svg" width="43" height="20" loading="lazy"
-                    alt="arrow-forward icon">
-                </a>
-
-              </div>
-
-            </li>
-
-          </ul>
-
-          <a href="#services" class="scroll-down">
-            <img src="./assets/images/scroll-down.svg" width="40" height="66" loading="lazy" alt="mouse scroll">
+          <a href="#" class="btn-icon">
+            <img src="./assets/images/arrow-forward.svg" loading="lazy" alt="arrow">
           </a>
-
-          <img src="./assets/images/gallery-shape.svg" width="220" height="78" loading="lazy" alt="" class="shape">
-
         </div>
-      </section>
 
+        <!-- Project 2 -->
+        <div class="gallery-card">
+          <figure class="card-banner img-holder has-before">
+            <img src="./assets/images/gallery-2.png" loading="lazy" alt="Network Scanner Tool" class="img-cover">
+          </figure>
+
+          <div class="card-content">
+            <h3 class="h6">
+              <a href="#" class="card-title">Network Scanner Tool</a>
+            </h3>
+            <span class="card-tag">Nmap / Networking</span>
+          </div>
+
+          <a href="#" class="btn-icon">
+            <img src="./assets/images/arrow-forward.svg" loading="lazy" alt="arrow">
+          </a>
+        </div>
+
+      </li>
+
+      <li class="gallery-item" data-reveal>
+
+        <!-- Project 3 -->
+        <div class="gallery-card">
+          <figure class="card-banner img-holder has-before">
+            <img src="./assets/images/gallery-3.png" loading="lazy" alt="AI Prediction Model" class="img-cover">
+          </figure>
+
+          <div class="card-content">
+            <h3 class="h6">
+              <a href="#" class="card-title">AI Prediction Model</a>
+            </h3>
+            <span class="card-tag">Machine Learning</span>
+          </div>
+
+          <a href="#" class="btn-icon">
+            <img src="./assets/images/arrow-forward.svg" loading="lazy" alt="arrow">
+          </a>
+        </div>
+
+        <!-- Project 4 -->
+        <div class="gallery-card">
+          <figure class="card-banner img-holder has-before">
+            <img src="./assets/images/gallery-4.png" loading="lazy" alt="Malware Analysis Lab" class="img-cover">
+          </figure>
+
+          <div class="card-content">
+            <h3 class="h6">
+              <a href="#" class="card-title">Malware Analysis Lab</a>
+            </h3>
+            <span class="card-tag">Cybersecurity</span>
+          </div>
+
+          <a href="#" class="btn-icon">
+            <img src="./assets/images/arrow-forward.svg" loading="lazy" alt="arrow">
+          </a>
+        </div>
+
+      </li>
+
+      <li class="gallery-item" data-reveal>
+
+        <!-- Project 5 -->
+        <div class="gallery-card">
+          <figure class="card-banner img-holder has-before">
+            <img src="./assets/images/gallery-5.png" loading="lazy" alt="Data Analysis Project" class="img-cover">
+          </figure>
+
+          <div class="card-content">
+            <h3 class="h6">
+              <a href="#" class="card-title">Data Analysis Project</a>
+            </h3>
+            <span class="card-tag">Pandas / Visualization</span>
+          </div>
+
+          <a href="#" class="btn-icon">
+            <img src="./assets/images/arrow-forward.svg" loading="lazy" alt="arrow">
+          </a>
+        </div>
+
+        <!-- Project 6 -->
+        <div class="gallery-card">
+          <figure class="card-banner img-holder has-before">
+            <img src="./assets/images/gallery-6.png" loading="lazy" alt="Web App Security Test" class="img-cover">
+          </figure>
+
+          <div class="card-content">
+            <h3 class="h6">
+              <a href="#" class="card-title">Web App Security Testing</a>
+            </h3>
+            <span class="card-tag">Burp Suite</span>
+          </div>
+
+          <a href="#" class="btn-icon">
+            <img src="./assets/images/arrow-forward.svg" loading="lazy" alt="arrow">
+          </a>
+        </div>
+
+      </li>
+
+      <li class="gallery-item" data-reveal>
+
+        <!-- Project 7 -->
+        <div class="gallery-card">
+          <figure class="card-banner img-holder has-before">
+            <img src="./assets/images/gallery-7.png" loading="lazy" alt="Deep Learning Model" class="img-cover">
+          </figure>
+
+          <div class="card-content">
+            <h3 class="h6">
+              <a href="#" class="card-title">Deep Learning Model</a>
+            </h3>
+            <span class="card-tag">TensorFlow / PyTorch</span>
+          </div>
+
+          <a href="#" class="btn-icon">
+            <img src="./assets/images/arrow-forward.svg" loading="lazy" alt="arrow">
+          </a>
+        </div>
+
+        <!-- Project 8 -->
+        <div class="gallery-card">
+          <figure class="card-banner img-holder has-before">
+            <img src="./assets/images/gallery-8.png" loading="lazy" alt="Cloud Deployment Project" class="img-cover">
+          </figure>
+
+          <div class="card-content">
+            <h3 class="h6">
+              <a href="#" class="card-title">Cloud Deployment Project</a>
+            </h3>
+            <span class="card-tag">Docker / Cloud</span>
+          </div>
+
+          <a href="#" class="btn-icon">
+            <img src="./assets/images/arrow-forward.svg" loading="lazy" alt="arrow">
+          </a>
+        </div>
+
+      </li>
+
+    </ul>
+
+    <a href="#services" class="scroll-down">
+      <img src="./assets/images/scroll-down.svg" loading="lazy" alt="scroll">
+    </a>
+
+    <img src="./assets/images/gallery-shape.svg" loading="lazy" alt="" class="shape">
+
+  </div>
+</section>
 
 
 
 
       <!-- 
-        - #CATEGORY
-      -->
+  - #CATEGORY (TECH FOCUS)
+-->
 
-      <section class="section category" aria-label="photography category">
-        <div class="container">
+<section class="section category" aria-label="tech category">
+  <div class="container">
 
-          <ul class="category-list">
+    <ul class="category-list">
 
-            <li class="category-item" data-reveal>
-              <a href="#" class="category-card">
+      <li class="category-item" data-reveal>
+        <a href="#" class="category-card">
+          <h3 class="h4 card-title">Cybersecurity</h3>
+          <figure class="card-banner img-holder" style="--width: 600; --height: 690;">
+            <img src="./assets/images/category-1.jpg" width="600" height="690" loading="lazy" alt="Cybersecurity" class="img-cover">
+          </figure>
+        </a>
+      </li>
 
-                <h3 class="h4 card-title">Landscape,</h3>
+      <li class="category-item" data-reveal>
+        <a href="#" class="category-card">
+          <h3 class="h4 card-title">Penetration Testing</h3>
+          <figure class="card-banner img-holder">
+            <img src="./assets/images/category-2.jpg" loading="lazy" alt="Penetration Testing" class="img-cover">
+          </figure>
+        </a>
+      </li>
 
-                <figure class="card-banner img-holder" style="--width: 600; --height: 690;">
-                  <img src="./assets/images/category-1.jpg" width="600" height="690" loading="lazy" alt="Landscape"
-                    class="img-cover">
-                </figure>
+      <li class="category-item" data-reveal>
+        <a href="#" class="category-card">
+          <h3 class="h4 card-title">Network Security</h3>
+          <figure class="card-banner img-holder">
+            <img src="./assets/images/category-3.jpg" loading="lazy" alt="Network Security" class="img-cover">
+          </figure>
+        </a>
+      </li>
 
-              </a>
-            </li>
+      <li class="category-item" data-reveal>
+        <a href="#" class="category-card">
+          <h3 class="h4 card-title">Ethical Hacking</h3>
+          <figure class="card-banner img-holder">
+            <img src="./assets/images/category-4.jpg" loading="lazy" alt="Ethical Hacking" class="img-cover">
+          </figure>
+        </a>
+      </li>
 
-            <li class="category-item" data-reveal>
-              <a href="#" class="category-card">
+      <li class="category-item" data-reveal>
+        <a href="#" class="category-card">
+          <h3 class="h4 card-title">AI & Machine Learning</h3>
+          <figure class="card-banner img-holder">
+            <img src="./assets/images/category-2.jpg" loading="lazy" alt="AI Machine Learning" class="img-cover">
+          </figure>
+        </a>
+      </li>
 
-                <h3 class="h4 card-title">Model,</h3>
+      <li class="category-item" data-reveal>
+        <a href="#" class="category-card">
+          <h3 class="h4 card-title">Deep Learning</h3>
+          <figure class="card-banner img-holder">
+            <img src="./assets/images/category-5.jpg" loading="lazy" alt="Deep Learning" class="img-cover">
+          </figure>
+        </a>
+      </li>
 
-                <figure class="card-banner img-holder" style="--width: 600; --height: 690;">
-                  <img src="./assets/images/category-2.jpg" width="600" height="690" loading="lazy" alt="Model"
-                    class="img-cover">
-                </figure>
+      <li class="category-item" data-reveal>
+        <a href="#" class="category-card">
+          <h3 class="h4 card-title">Data Science</h3>
+          <figure class="card-banner img-holder">
+            <img src="./assets/images/category-6.jpg" loading="lazy" alt="Data Science" class="img-cover">
+          </figure>
+        </a>
+      </li>
 
-              </a>
-            </li>
+      <li class="category-item" data-reveal>
+        <a href="#" class="category-card">
+          <h3 class="h4 card-title">Cloud Computing</h3>
+          <figure class="card-banner img-holder">
+            <img src="./assets/images/category-7.jpg" loading="lazy" alt="Cloud Computing" class="img-cover">
+          </figure>
+        </a>
+      </li>
 
-            <li class="category-item" data-reveal>
-              <a href="#" class="category-card">
+      <li class="category-item" data-reveal>
+        <a href="#" class="category-card">
+          <h3 class="h4 card-title">Linux Systems</h3>
+          <figure class="card-banner img-holder">
+            <img src="./assets/images/category-8.jpg" loading="lazy" alt="Linux Systems" class="img-cover">
+          </figure>
+        </a>
+      </li>
 
-                <h3 class="h4 card-title">Street,</h3>
+      <li class="category-item" data-reveal>
+        <a href="#" class="category-card">
+          <h3 class="h4 card-title">Programming</h3>
+          <figure class="card-banner img-holder">
+            <img src="./assets/images/category-9.jpg" loading="lazy" alt="Programming" class="img-cover">
+          </figure>
+        </a>
+      </li>
 
-                <figure class="card-banner img-holder" style="--width: 600; --height: 690;">
-                  <img src="./assets/images/category-3.jpg" width="600" height="690" loading="lazy" alt="Street"
-                    class="img-cover">
-                </figure>
+      <li class="category-item" data-reveal>
+        <a href="#" class="category-card">
+          <h3 class="h4 card-title">DevOps</h3>
+          <figure class="card-banner img-holder">
+            <img src="./assets/images/category-7.jpg" loading="lazy" alt="DevOps" class="img-cover">
+          </figure>
+        </a>
+      </li>
 
-              </a>
-            </li>
+      <li class="category-item" data-reveal>
+        <a href="#" class="category-card">
+          <h3 class="h4 card-title">Projects</h3>
+          <figure class="card-banner img-holder">
+            <img src="./assets/images/category-10.jpg" loading="lazy" alt="Projects" class="img-cover">
+          </figure>
+        </a>
+      </li>
 
-            <li class="category-item" data-reveal>
-              <a href="#" class="category-card">
+    </ul>
 
-                <h3 class="h4 card-title">Product,</h3>
-
-                <figure class="card-banner img-holder" style="--width: 600; --height: 690;">
-                  <img src="./assets/images/category-4.jpg" width="600" height="690" loading="lazy" alt="Product"
-                    class="img-cover">
-                </figure>
-
-              </a>
-            </li>
-
-            <li class="category-item" data-reveal>
-              <a href="#" class="category-card">
-
-                <h3 class="h4 card-title">Fashion,</h3>
-
-                <figure class="card-banner img-holder" style="--width: 600; --height: 690;">
-                  <img src="./assets/images/category-2.jpg" width="600" height="690" loading="lazy" alt="Fashion"
-                    class="img-cover">
-                </figure>
-
-              </a>
-            </li>
-
-            <li class="category-item" data-reveal>
-              <a href="#" class="category-card">
-
-                <h3 class="h4 card-title">Film,</h3>
-
-                <figure class="card-banner img-holder" style="--width: 600; --height: 690;">
-                  <img src="./assets/images/category-5.jpg" width="600" height="690" loading="lazy" alt="Film"
-                    class="img-cover">
-                </figure>
-
-              </a>
-            </li>
-
-            <li class="category-item" data-reveal>
-              <a href="#" class="category-card">
-
-                <h3 class="h4 card-title">Architecture,</h3>
-
-                <figure class="card-banner img-holder" style="--width: 600; --height: 690;">
-                  <img src="./assets/images/category-6.jpg" width="600" height="690" loading="lazy" alt="Architecture"
-                    class="img-cover">
-                </figure>
-
-              </a>
-            </li>
-
-            <li class="category-item" data-reveal>
-              <a href="#" class="category-card">
-
-                <h3 class="h4 card-title">Event,</h3>
-
-                <figure class="card-banner img-holder" style="--width: 600; --height: 690;">
-                  <img src="./assets/images/category-7.jpg" width="600" height="690" loading="lazy" alt="Event"
-                    class="img-cover">
-                </figure>
-
-              </a>
-            </li>
-
-            <li class="category-item" data-reveal>
-              <a href="#" class="category-card">
-
-                <h3 class="h4 card-title">Wedding,</h3>
-
-                <figure class="card-banner img-holder" style="--width: 600; --height: 690;">
-                  <img src="./assets/images/category-8.jpg" width="600" height="690" loading="lazy" alt="Wedding"
-                    class="img-cover">
-                </figure>
-
-              </a>
-            </li>
-
-            <li class="category-item" data-reveal>
-              <a href="#" class="category-card">
-
-                <h3 class="h4 card-title">People,</h3>
-
-                <figure class="card-banner img-holder" style="--width: 600; --height: 690;">
-                  <img src="./assets/images/category-9.jpg" width="600" height="690" loading="lazy" alt="People"
-                    class="img-cover">
-                </figure>
-
-              </a>
-            </li>
-
-            <li class="category-item" data-reveal>
-              <a href="#" class="category-card">
-
-                <h3 class="h4 card-title">Event,</h3>
-
-                <figure class="card-banner img-holder" style="--width: 600; --height: 690;">
-                  <img src="./assets/images/category-7.jpg" width="600" height="690" loading="lazy" alt="Event"
-                    class="img-cover">
-                </figure>
-
-              </a>
-            </li>
-
-            <li class="category-item" data-reveal>
-              <a href="#" class="category-card">
-
-                <h3 class="h4 card-title">Food,</h3>
-
-                <figure class="card-banner img-holder" style="--width: 600; --height: 690;">
-                  <img src="./assets/images/category-10.jpg" width="600" height="690" loading="lazy" alt="Food"
-                    class="img-cover">
-                </figure>
-
-              </a>
-            </li>
-
-            <li class="category-item" data-reveal>
-              <a href="#" class="category-card">
-
-                <h3 class="h4 card-title">Health & Wellness.</h3>
-
-                <figure class="card-banner img-holder" style="--width: 600; --height: 690;">
-                  <img src="./assets/images/category-11.jpg" width="600" height="690" loading="lazy"
-                    alt="Health & Wellness" class="img-cover">
-                </figure>
-
-              </a>
-            </li>
-
-          </ul>
-
-        </div>
-      </section>
-
-
-
+  </div>
+</section>
 
 
       <!-- 
@@ -674,292 +593,384 @@
         </div>
       </section>
       <!--=============== SKILLS ===============-->
+
       <section class="skills" id="skills">
-        <div class="skills-content section-content">
-          <p class="section-subtitle container" id="skills-section-label">My skills</p>
-          <h3 class="h3 card-title" style="text-align: center;">What My Programming Skills Included?</h3>
-          <div class="skills-toggle" data-toggle-box>
-            <button class="toggle-btn active" data-toggle-btn>Skills</button>
-            <button class="toggle-btn" data-toggle-btn>Tools</button>
-          </div>
+  <div class="skills-content section-content">
+    <p class="section-subtitle container" id="skills-section-label">My skills</p>
+    <h3 class="h3 card-title" style="text-align: center;">
+      Cybersecurity & AI/ML Skills
+    </h3>
+
+    <div class="skills-toggle" data-toggle-box>
+      <button class="toggle-btn active" data-toggle-btn>Skills</button>
+      <button class="toggle-btn" data-toggle-btn>Tools</button>
+    </div>
+  </div>
+
+  <div class="skills-box" data-skills-box>
+
+    <!-- SKILLS -->
+    <ul class="skills-list">
+
+      <li>
+        <div class="skill-card">
+          <div class="tooltip">Python</div>
+          <div class="card-icon"><img src="./assets/images/python.png" alt="Python"></div>
         </div>
-      
-        <div class="skills-box" data-skills-box>
-          <ul class="skills-list">
-            <li>
-              <div class="skill-card">
-                <div class="tooltip">HTML5</div>
-                <div class="card-icon"><img src="./assets/images/html5.png" alt="HTML5 logo"></div>
-              </div>
-            </li>
-            <li>
-              <div class="skill-card">
-                <div class="tooltip">CSS3</div>
-                <div class="card-icon"><img src="./assets/images/css3.png" alt="CSS3 logo"></div>
-              </div>
-            </li>
-            <li>
-              <div class="skill-card">
-                <div class="tooltip">JavaScript</div>
-                <div class="card-icon"><img src="./assets/images/javascript.png" alt="JavaScript logo"></div>
-              </div>
-            </li>
-            <li>
-              <div class="skill-card">
-                <div class="tooltip">TypeScript</div>
-                <div class="card-icon"><img src="./assets/images/typescript.png" alt="TypeScript logo"></div>
-              </div>
-            </li>
-            <li>
-              <div class="skill-card">
-                <div class="tooltip">jQuery</div>
-                <div class="card-icon"><img src="./assets/images/jquery.png" alt="jQuery logo"></div>
-              </div>
-            </li>
-            <li>
-              <div class="skill-card">
-                <div class="tooltip">Bootstrap</div>
-                <div class="card-icon"><img src="./assets/images/bootstrap.png" alt="Bootstrap logo"></div>
-              </div>
-            </li>
-            <li>
-              <div class="skill-card">
-                <div class="tooltip">Angular</div>
-                <div class="card-icon"><img src="./assets/images/angular.png" alt="Angular logo"></div>
-              </div>
-            </li>
-            <li>
-              <div class="skill-card">
-                <div class="tooltip">React</div>
-                <div class="card-icon"><img src="./assets/images/react.png" alt="React logo"></div>
-              </div>
-            </li>
-            <li>
-              <div class="skill-card">
-                <div class="tooltip">Vue</div>
-                <div class="card-icon"><img src="./assets/images/vue.png" alt="Vue logo"></div>
-              </div>
-            </li>
-            <li>
-              <div class="skill-card">
-                <div class="tooltip">Firebase</div>
-                <div class="card-icon"><img src="./assets/images/firebase.png" alt="Firebase logo"></div>
-              </div>
-            </li>
-            <li>
-              <div class="skill-card">
-                <div class="tooltip">PugJs</div>
-                <div class="card-icon"><img src="./assets/images/pugjs.png" alt="PugJs logo"></div>
-              </div>
-            </li>
-            <li>
-              <div class="skill-card">
-                <div class="tooltip">SASS</div>
-                <div class="card-icon"><img src="./assets/images/sass.png" alt="SASS logo"></div>
-              </div>
-            </li>
-          </ul>
-      
-          <ul class="tools-list">
-            <li>
-              <div class="skill-card">
-                <div class="tooltip">Ajax</div>
-                <div class="card-icon"><img src="./assets/images/ajax.png" alt="Ajax logo"></div>
-              </div>
-            </li>
-            <li>
-              <div class="skill-card">
-                <div class="tooltip">Gulp</div>
-                <div class="card-icon"><img src="./assets/images/gulp.png" alt="Gulp logo"></div>
-              </div>
-            </li>
-            <li>
-              <div class="skill-card">
-                <div class="tooltip">Webpack</div>
-                <div class="card-icon"><img src="./assets/images/webpack.png" alt="Webpack logo"></div>
-              </div>
-            </li>
-            <li>
-              <div class="skill-card">
-                <div class="tooltip">Git</div>
-                <div class="card-icon"><img src="./assets/images/git.png" alt="Git logo"></div>
-              </div>
-            </li>
-            <li>
-              <div class="skill-card">
-                <div class="tooltip">Npm</div>
-                <div class="card-icon"><img src="./assets/images/npm.png" alt="Npm logo"></div>
-              </div>
-            </li>
-            <li>
-              <div class="skill-card">
-                <div class="tooltip">Command Line</div>
-                <div class="card-icon"><img src="./assets/images/command.png" alt="Command Line logo"></div>
-              </div>
-            </li>
-            <li>
-              <div class="skill-card">
-                <div class="tooltip">VS Code</div>
-                <div class="card-icon"><img src="./assets/images/vs-code.png" alt="VS Code logo"></div>
-              </div>
-            </li>
-            <li>
-              <div class="skill-card">
-                <div class="tooltip">Trello</div>
-                <div class="card-icon"><img src="./assets/images/trello.png" alt="Trello logo"></div>
-              </div>
-            </li>
-            <li>
-              <div class="skill-card">
-                <div class="tooltip">ClickUp</div>
-                <div class="card-icon"><img src="./assets/images/clickup.png" alt="ClickUp logo"></div>
-              </div>
-            </li>
-            <li>
-              <div class="skill-card">
-                <div class="tooltip">Slack</div>
-                <div class="card-icon"><img src="./assets/images/slack.png" alt="Slack logo"></div>
-              </div>
-            </li>
-            <li>
-              <div class="skill-card">
-                <div class="tooltip">Photoshop</div>
-                <div class="card-icon"><img src="./assets/images/photoshop.png" alt="Photoshop logo"></div>
-              </div>
-            </li>
-            <li>
-              <div class="skill-card">
-                <div class="tooltip">Adobe XD</div>
-                <div class="card-icon"><img src="./assets/images/adobe-xd.png" alt="Adobe XD logo"></div>
-              </div>
-            </li>
-          </ul>
+      </li>
+
+      <li>
+        <div class="skill-card">
+          <div class="tooltip">Machine Learning</div>
+          <div class="card-icon"><img src="./assets/images/ml.png" alt="Machine Learning"></div>
         </div>
-      </section>
+      </li>
+
+      <li>
+        <div class="skill-card">
+          <div class="tooltip">Deep Learning</div>
+          <div class="card-icon"><img src="./assets/images/deep-learning.png" alt="Deep Learning"></div>
+        </div>
+      </li>
+
+      <li>
+        <div class="skill-card">
+          <div class="tooltip">Data Analysis</div>
+          <div class="card-icon"><img src="./assets/images/data.png" alt="Data Analysis"></div>
+        </div>
+      </li>
+
+      <li>
+        <div class="skill-card">
+          <div class="tooltip">Cybersecurity</div>
+          <div class="card-icon"><img src="./assets/images/cyber.png" alt="Cybersecurity"></div>
+        </div>
+      </li>
+
+      <li>
+        <div class="skill-card">
+          <div class="tooltip">Penetration Testing</div>
+          <div class="card-icon"><img src="./assets/images/hacking.png" alt="Pentesting"></div>
+        </div>
+      </li>
+
+      <li>
+        <div class="skill-card">
+          <div class="tooltip">Network Security</div>
+          <div class="card-icon"><img src="./assets/images/network.png" alt="Network Security"></div>
+        </div>
+      </li>
+
+      <li>
+        <div class="skill-card">
+          <div class="tooltip">Linux Systems</div>
+          <div class="card-icon"><img src="./assets/images/linux.png" alt="Linux"></div>
+        </div>
+      </li>
+
+      <li>
+        <div class="skill-card">
+          <div class="tooltip">SQL & Databases</div>
+          <div class="card-icon"><img src="./assets/images/database.png" alt="Database"></div>
+        </div>
+      </li>
+
+      <li>
+        <div class="skill-card">
+          <div class="tooltip">Cloud Computing</div>
+          <div class="card-icon"><img src="./assets/images/cloud.png" alt="Cloud"></div>
+        </div>
+      </li>
+
+    </ul>
+
+    <!-- TOOLS -->
+    <ul class="tools-list">
+
+      <li>
+        <div class="skill-card">
+          <div class="tooltip">Kali Linux</div>
+          <div class="card-icon"><img src="./assets/images/kali.png" alt="Kali Linux"></div>
+        </div>
+      </li>
+
+      <li>
+        <div class="skill-card">
+          <div class="tooltip">Nmap</div>
+          <div class="card-icon"><img src="./assets/images/nmap.png" alt="Nmap"></div>
+        </div>
+      </li>
+
+      <li>
+        <div class="skill-card">
+          <div class="tooltip">Metasploit</div>
+          <div class="card-icon"><img src="./assets/images/metasploit.png" alt="Metasploit"></div>
+        </div>
+      </li>
+
+      <li>
+        <div class="skill-card">
+          <div class="tooltip">Wireshark</div>
+          <div class="card-icon"><img src="./assets/images/wireshark.png" alt="Wireshark"></div>
+        </div>
+      </li>
+
+      <li>
+        <div class="skill-card">
+          <div class="tooltip">Burp Suite</div>
+          <div class="card-icon"><img src="./assets/images/burp.png" alt="Burp Suite"></div>
+        </div>
+      </li>
+
+      <li>
+        <div class="skill-card">
+          <div class="tooltip">TensorFlow</div>
+          <div class="card-icon"><img src="./assets/images/tensorflow.png" alt="TensorFlow"></div>
+        </div>
+      </li>
+
+      <li>
+        <div class="skill-card">
+          <div class="tooltip">PyTorch</div>
+          <div class="card-icon"><img src="./assets/images/pytorch.png" alt="PyTorch"></div>
+        </div>
+      </li>
+
+      <li>
+        <div class="skill-card">
+          <div class="tooltip">Scikit-learn</div>
+          <div class="card-icon"><img src="./assets/images/sklearn.png" alt="Scikit-learn"></div>
+        </div>
+      </li>
+
+      <li>
+        <div class="skill-card">
+          <div class="tooltip">Docker</div>
+          <div class="card-icon"><img src="./assets/images/docker.png" alt="Docker"></div>
+        </div>
+      </li>
+
+      <li>
+        <div class="skill-card">
+          <div class="tooltip">Git & GitHub</div>
+          <div class="card-icon"><img src="./assets/images/git.png" alt="Git"></div>
+        </div>
+      </li>
+
+    </ul>
+
+  </div>
+</section>
 
 
       <!-- 
         - #SKILLS PAGE 
       -->
+
       <section class="section skills-page" id="skills-page" aria-labelledby="skills-label">
-        <div class="container">
+  <div class="container">
 
-          <p class="section-subtitle" id="skills-label" data-reveal>My Expertise</p>
+    <p class="section-subtitle" id="skills-label" data-reveal>My Expertise</p>
+    <h2 class="h2 section-title" data-reveal>Cybersecurity & AI/ML Skills</h2>
 
-          <h2 class="h2 section-title" data-reveal>Professional Skills & Experience</h2>
+    <div class="skills-wrapper">
 
-          <div class="skills-wrapper">
+      <!-- Cybersecurity -->
+      <div class="skill-category" data-reveal>
+        <h3 class="h4">Cybersecurity</h3>
+        <ul class="skill-progress-list">
 
-            <div class="skill-category" data-reveal>
-              <h3 class="h4">Frontend Development</h3>
-              <ul class="skill-progress-list">
-                <li class="progress-item">
-                  <div class="label-wrapper">
-                    <span>HTML & CSS</span>
-                    <span>95%</span>
-                  </div>
-                  <div class="progress">
-                    <div class="progress-fill" style="width: 95%"></div>
-                  </div>
-                </li>
-
-                <li class="progress-item">
-                  <div class="label-wrapper">
-                    <span>JavaScript</span>
-                    <span>85%</span>
-                  </div>
-                  <div class="progress">
-                    <div class="progress-fill" style="width: 85%"></div>
-                  </div>
-                </li>
-
-                <li class="progress-item">
-                  <div class="label-wrapper">
-                    <span>React</span>
-                    <span>80%</span>
-                  </div>
-                  <div class="progress">
-                    <div class="progress-fill" style="width: 80%"></div>
-                  </div>
-                </li>
-              </ul>
+          <li class="progress-item">
+            <div class="label-wrapper">
+              <span>Network Security</span>
+              <span>85%</span>
             </div>
-
-            <div class="skill-category" data-reveal>
-              <h3 class="h4">Backend Development</h3>
-              <ul class="skill-progress-list">
-                <li class="progress-item">
-                  <div class="label-wrapper">
-                    <span>Node.js</span>
-                    <span>75%</span>
-                  </div>
-                  <div class="progress">
-                    <div class="progress-fill" style="width: 75%"></div>
-                  </div>
-                </li>
-
-                <li class="progress-item">
-                  <div class="label-wrapper">
-                    <span>Python</span>
-                    <span>70%</span>
-                  </div>
-                  <div class="progress">
-                    <div class="progress-fill" style="width: 70%"></div>
-                  </div>
-                </li>
-
-                <li class="progress-item">
-                  <div class="label-wrapper">
-                    <span>Database Management</span>
-                    <span>80%</span>
-                  </div>
-                  <div class="progress">
-                    <div class="progress-fill" style="width: 80%"></div>
-                  </div>
-                </li>
-              </ul>
+            <div class="progress">
+              <div class="progress-fill" style="width: 85%"></div>
             </div>
+          </li>
 
-            <div class="skill-category" data-reveal>
-              <h3 class="h4">Other Skills</h3>
-              <ul class="skill-progress-list">
-                <li class="progress-item">
-                  <div class="label-wrapper">
-                    <span>UI/UX Design</span>
-                    <span>85%</span>
-                  </div>
-                  <div class="progress">
-                    <div class="progress-fill" style="width: 85%"></div>
-                  </div>
-                </li>
-
-                <li class="progress-item">
-                  <div class="label-wrapper">
-                    <span>Project Management</span>
-                    <span>90%</span>
-                  </div>
-                  <div class="progress">
-                    <div class="progress-fill" style="width: 90%"></div>
-                  </div>
-                </li>
-
-                <li class="progress-item">
-                  <div class="label-wrapper">
-                    <span>Problem Solving</span>
-                    <span>95%</span>
-                  </div>
-                  <div class="progress">
-                    <div class="progress-fill" style="width: 95%"></div>
-                  </div>
-                </li>
-              </ul>
+          <li class="progress-item">
+            <div class="label-wrapper">
+              <span>Penetration Testing</span>
+              <span>75%</span>
             </div>
+            <div class="progress">
+              <div class="progress-fill" style="width: 75%"></div>
+            </div>
+          </li>
 
-          </div>
+          <li class="progress-item">
+            <div class="label-wrapper">
+              <span>Ethical Hacking</span>
+              <span>80%</span>
+            </div>
+            <div class="progress">
+              <div class="progress-fill" style="width: 80%"></div>
+            </div>
+          </li>
 
-        </div>
-      </section>
+          <li class="progress-item">
+            <div class="label-wrapper">
+              <span>SIEM Tools (Splunk)</span>
+              <span>70%</span>
+            </div>
+            <div class="progress">
+              <div class="progress-fill" style="width: 70%"></div>
+            </div>
+          </li>
 
+          <li class="progress-item">
+            <div class="label-wrapper">
+              <span>Linux Security (Kali Linux)</span>
+              <span>85%</span>
+            </div>
+            <div class="progress">
+              <div class="progress-fill" style="width: 85%"></div>
+            </div>
+          </li>
+
+        </ul>
+      </div>
+
+      <!-- AI / Machine Learning -->
+      <div class="skill-category" data-reveal>
+        <h3 class="h4">AI / Machine Learning</h3>
+        <ul class="skill-progress-list">
+
+          <li class="progress-item">
+            <div class="label-wrapper">
+              <span>Python (Data Science)</span>
+              <span>80%</span>
+            </div>
+            <div class="progress">
+              <div class="progress-fill" style="width: 80%"></div>
+            </div>
+          </li>
+
+          <li class="progress-item">
+            <div class="label-wrapper">
+              <span>Data Analysis (Pandas, NumPy)</span>
+              <span>75%</span>
+            </div>
+            <div class="progress">
+              <div class="progress-fill" style="width: 75%"></div>
+            </div>
+          </li>
+
+          <li class="progress-item">
+            <div class="label-wrapper">
+              <span>Machine Learning (Scikit-learn)</span>
+              <span>70%</span>
+            </div>
+            <div class="progress">
+              <div class="progress-fill" style="width: 70%"></div>
+            </div>
+          </li>
+
+          <li class="progress-item">
+            <div class="label-wrapper">
+              <span>Deep Learning (TensorFlow / PyTorch)</span>
+              <span>65%</span>
+            </div>
+            <div class="progress">
+              <div class="progress-fill" style="width: 65%"></div>
+            </div>
+          </li>
+
+          <li class="progress-item">
+            <div class="label-wrapper">
+              <span>Data Visualization</span>
+              <span>75%</span>
+            </div>
+            <div class="progress">
+              <div class="progress-fill" style="width: 75%"></div>
+            </div>
+          </li>
+
+        </ul>
+      </div>
+
+      <!-- DevOps / Tools -->
+      <div class="skill-category" data-reveal>
+        <h3 class="h4">Tools & DevOps</h3>
+        <ul class="skill-progress-list">
+
+          <li class="progress-item">
+            <div class="label-wrapper">
+              <span>Git & GitHub</span>
+              <span>85%</span>
+            </div>
+            <div class="progress">
+              <div class="progress-fill" style="width: 85%"></div>
+            </div>
+          </li>
+
+          <li class="progress-item">
+            <div class="label-wrapper">
+              <span>Docker</span>
+              <span>70%</span>
+            </div>
+            <div class="progress">
+              <div class="progress-fill" style="width: 70%"></div>
+            </div>
+          </li>
+
+          <li class="progress-item">
+            <div class="label-wrapper">
+              <span>Linux (Ubuntu / Kali)</span>
+              <span>85%</span>
+            </div>
+            <div class="progress">
+              <div class="progress-fill" style="width: 85%"></div>
+            </div>
+          </li>
+
+        </ul>
+      </div>
+
+      <!-- Soft Skills -->
+      <div class="skill-category" data-reveal>
+        <h3 class="h4">Professional Skills</h3>
+        <ul class="skill-progress-list">
+
+          <li class="progress-item">
+            <div class="label-wrapper">
+              <span>Problem Solving</span>
+              <span>95%</span>
+            </div>
+            <div class="progress">
+              <div class="progress-fill" style="width: 95%"></div>
+            </div>
+          </li>
+
+          <li class="progress-item">
+            <div class="label-wrapper">
+              <span>Critical Thinking</span>
+              <span>90%</span>
+            </div>
+            <div class="progress">
+              <div class="progress-fill" style="width: 90%"></div>
+            </div>
+          </li>
+
+          <li class="progress-item">
+            <div class="label-wrapper">
+              <span>Team Collaboration</span>
+              <span>85%</span>
+            </div>
+            <div class="progress">
+              <div class="progress-fill" style="width: 85%"></div>
+            </div>
+          </li>
+
+        </ul>
+      </div>
+
+    </div>
+
+  </div>
+</section>
       <!-- 
         - #EDUCATION
       -->
@@ -1539,7 +1550,7 @@
   </div>
 
   <!-- FOOTER BACKGROUND -->
-  <div class="footer-bg has-before">
+  <div class="footer-bg">
     <img src="./assets/images/footer-bg.jpg" width="1920" height="1135" loading="lazy" alt="photography"
       class="img-cover">
   </div>

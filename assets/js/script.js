@@ -10,19 +10,61 @@ const addEventOnElements = function (elements, eventType, callback) {
 // Theme toggle
 const themeToggleBtn = document.querySelector('[data-theme-toggle]');
 const htmlEl = document.documentElement;
+const themeStorageKey = 'theme';
+
+const getPreferredTheme = function () {
+  return window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+}
+
+const readStoredTheme = function () {
+  try {
+    const storedTheme = localStorage.getItem(themeStorageKey);
+    return storedTheme === 'light' || storedTheme === 'dark' ? storedTheme : null;
+  } catch (error) {
+    return null;
+  }
+}
+
+const applyTheme = function (theme, persist = false) {
+  const nextTheme = theme === 'light' ? 'light' : 'dark';
+  htmlEl.setAttribute('data-theme', nextTheme);
+  htmlEl.style.colorScheme = nextTheme;
+
+  if (themeToggleBtn) {
+    themeToggleBtn.setAttribute('aria-pressed', nextTheme === 'light' ? 'true' : 'false');
+  }
+
+  if (persist) {
+    try {
+      localStorage.setItem(themeStorageKey, nextTheme);
+    } catch (error) {
+      // Ignore storage failures in restricted browsing modes.
+    }
+  }
+}
+
 if (themeToggleBtn) {
-  const savedTheme = localStorage.getItem('theme');
-  const prefersLight = window.matchMedia('(prefers-color-scheme: light)').matches;
-  const initialTheme = savedTheme ? savedTheme : (prefersLight ? 'light' : 'dark');
-  htmlEl.setAttribute('data-theme', initialTheme);
+  const savedTheme = readStoredTheme();
+  const initialTheme = savedTheme || getPreferredTheme();
+  applyTheme(initialTheme);
 
   const toggleTheme = () => {
     const current = htmlEl.getAttribute('data-theme');
     const next = current === 'dark' ? 'light' : 'dark';
-    htmlEl.setAttribute('data-theme', next);
-    localStorage.setItem('theme', next);
+    applyTheme(next, true);
   };
   themeToggleBtn.addEventListener('click', toggleTheme);
+
+  if (!savedTheme) {
+    const themeMedia = window.matchMedia('(prefers-color-scheme: light)');
+    const handleSystemThemeChange = () => applyTheme(getPreferredTheme());
+
+    if (typeof themeMedia.addEventListener === 'function') {
+      themeMedia.addEventListener('change', handleSystemThemeChange);
+    } else if (typeof themeMedia.addListener === 'function') {
+      themeMedia.addListener(handleSystemThemeChange);
+    }
+  }
 }
 
 // PRELOADING
@@ -346,3 +388,143 @@ const toolsBtnLink = document.querySelector('.tools-btn[href="#"]');
 if (toolsBtnLink) {
   toolsBtnLink.addEventListener('click', (e) => e.preventDefault());
 }
+
+// Full-body binary rain background (Matrix-style)
+(() => {
+  const root = document.documentElement;
+  const canvas = document.createElement('canvas');
+  canvas.className = 'binary-rain-canvas';
+  canvas.setAttribute('aria-hidden', 'true');
+
+  const ctx = canvas.getContext('2d');
+  if (!ctx) return;
+
+  let width = 0;
+  let height = 0;
+  let dpr = 1;
+  let fontSize = 16;
+  let colGap = 18;
+  let columns = 0;
+  let drops = [];
+  let speeds = [];
+  let frameId = 0;
+  let lastTick = 0;
+
+  const FPS = 20; // slow rain to match Matrix reference style
+  const FRAME_MS = 1000 / FPS;
+  const MAX_OFFSCREEN_OFFSET = 20; // max extra rows a column starts above the canvas
+  const MIN_OFFSCREEN_OFFSET = 2;  // min rows above the canvas on reset
+
+  const setupCanvas = () => {
+    dpr = Math.max(1, Math.min(2, window.devicePixelRatio || 1));
+    width = window.innerWidth;
+    height = Math.max(window.innerHeight, document.documentElement.clientHeight);
+
+    canvas.width = Math.floor(width * dpr);
+    canvas.height = Math.floor(height * dpr);
+    canvas.style.width = `${width}px`;
+    canvas.style.height = `${height}px`;
+
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+
+    // Column gap slightly larger than font so characters breathe
+    fontSize = width < 575 ? 13 : width < 992 ? 15 : 17;
+    colGap = fontSize + 2;
+    columns = Math.max(1, Math.floor(width / colGap));
+
+    // Stagger start positions so the screen fills immediately
+    drops = Array.from({ length: columns }, () => Math.random() * (height / fontSize));
+    speeds = Array.from({ length: columns }, () => 0.28 + Math.random() * 0.28);
+  };
+
+  const getCssVar = (name, fallback) => {
+    const value = getComputedStyle(root).getPropertyValue(name).trim();
+    return value || fallback;
+  };
+
+  const draw = (time) => {
+    if (time - lastTick < FRAME_MS) {
+      frameId = requestAnimationFrame(draw);
+      return;
+    }
+    lastTick = time;
+
+    // Very low alpha → long visible trails (like the reference image)
+    const trail = getCssVar('--binary-rain-trail', 'rgba(0,0,0,0.05)');
+    const bright = getCssVar('--binary-rain-char-bright', 'rgba(0,255,70,0.95)');
+    const dim = getCssVar('--binary-rain-char-dim', 'rgba(0,200,50,0.55)');
+    const head = getCssVar('--binary-rain-char-head', 'rgba(180,255,200,1.0)');
+
+    ctx.fillStyle = trail;
+    ctx.fillRect(0, 0, width, height);
+
+    ctx.font = `500 ${fontSize}px ${getCssVar('--ff-gordita', 'monospace')}`;
+    ctx.textBaseline = 'top';
+
+    const colGap = fontSize + 2;
+
+    for (let i = 0; i < columns; i++) {
+      const value = Math.random() > 0.5 ? '1' : '0';
+      const x = i * colGap;
+      const y = drops[i] * fontSize;
+
+      // The leading character is bright white-green; trailing chars use normal colors
+      if (drops[i] > 0) {
+        ctx.fillStyle = head;
+      } else {
+        ctx.fillStyle = Math.random() > 0.18 ? bright : dim;
+      }
+      ctx.fillText(value, x, y);
+
+      drops[i] += speeds[i];
+
+      // Reset column after it exits the bottom; some start off-screen for variety
+      if (y > height + Math.random() * 200) {
+        drops[i] = -(Math.random() * MAX_OFFSCREEN_OFFSET + MIN_OFFSCREEN_OFFSET);
+        speeds[i] = 0.28 + Math.random() * 0.28;
+      }
+    }
+
+    frameId = requestAnimationFrame(draw);
+  };
+
+  const start = () => {
+    if (!document.body.contains(canvas)) {
+      document.body.prepend(canvas);
+    }
+    setupCanvas();
+    if (frameId) cancelAnimationFrame(frameId);
+    frameId = requestAnimationFrame(draw);
+  };
+
+  const stop = () => {
+    if (frameId) {
+      cancelAnimationFrame(frameId);
+      frameId = 0;
+    }
+  };
+
+  window.addEventListener('resize', setupCanvas, { passive: true });
+  document.addEventListener('visibilitychange', () => {
+    if (document.hidden) {
+      stop();
+    } else {
+      lastTick = 0;
+      frameId = requestAnimationFrame(draw);
+    }
+  });
+
+  // Keep colors synced when theme switches.
+  const observer = new MutationObserver(() => {
+    // no-op: colors are read from CSS each frame; forcing a clear avoids ghosting
+    ctx.clearRect(0, 0, width, height);
+  });
+
+  observer.observe(root, { attributes: true, attributeFilter: ['data-theme'] });
+
+  if (document.readyState === 'loading') {
+    window.addEventListener('DOMContentLoaded', start, { once: true });
+  } else {
+    start();
+  }
+})();
