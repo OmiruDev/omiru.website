@@ -402,14 +402,14 @@ if (toolsBtnLink) {
   let width = 0;
   let height = 0;
   let dpr = 1;
-  let fontSize = 18;
+  let fontSize = 16;
   let columns = 0;
   let drops = [];
   let speeds = [];
   let frameId = 0;
   let lastTick = 0;
 
-  const FPS = 26; // intentionally slow to match requested rain style
+  const FPS = 20; // slow rain to match Matrix reference style
   const FRAME_MS = 1000 / FPS;
 
   const setupCanvas = () => {
@@ -424,11 +424,14 @@ if (toolsBtnLink) {
 
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
 
-    fontSize = width < 575 ? 12 : width < 992 ? 14 : 16;
-    columns = Math.max(1, Math.floor(width / fontSize));
+    // Column gap slightly larger than font so characters breathe
+    fontSize = width < 575 ? 13 : width < 992 ? 15 : 17;
+    const colGap = fontSize + 2;
+    columns = Math.max(1, Math.floor(width / colGap));
 
+    // Stagger start positions so the screen fills immediately
     drops = Array.from({ length: columns }, () => Math.random() * (height / fontSize));
-    speeds = Array.from({ length: columns }, () => 0.45 + Math.random() * 0.35);
+    speeds = Array.from({ length: columns }, () => 0.28 + Math.random() * 0.28);
   };
 
   const getCssVar = (name, fallback) => {
@@ -443,9 +446,11 @@ if (toolsBtnLink) {
     }
     lastTick = time;
 
-    const trail = getCssVar('--binary-rain-trail', 'rgba(2, 12, 8, 0.18)');
-    const bright = getCssVar('--binary-rain-char-bright', 'rgba(96, 255, 154, 0.9)');
-    const dim = getCssVar('--binary-rain-char-dim', 'rgba(62, 255, 126, 0.6)');
+    // Very low alpha → long visible trails (like the reference image)
+    const trail = getCssVar('--binary-rain-trail', 'rgba(0,0,0,0.05)');
+    const bright = getCssVar('--binary-rain-char-bright', 'rgba(0,255,70,0.95)');
+    const dim = getCssVar('--binary-rain-char-dim', 'rgba(0,200,50,0.55)');
+    const head = getCssVar('--binary-rain-char-head', 'rgba(180,255,200,1.0)');
 
     ctx.fillStyle = trail;
     ctx.fillRect(0, 0, width, height);
@@ -453,18 +458,27 @@ if (toolsBtnLink) {
     ctx.font = `500 ${fontSize}px ${getCssVar('--ff-gordita', 'monospace')}`;
     ctx.textBaseline = 'top';
 
+    const colGap = fontSize + 2;
+
     for (let i = 0; i < columns; i++) {
       const value = Math.random() > 0.5 ? '1' : '0';
-      const x = i * fontSize;
+      const x = i * colGap;
       const y = drops[i] * fontSize;
 
-      ctx.fillStyle = Math.random() > 0.14 ? bright : dim;
+      // The leading character is bright white-green; trailing chars use normal colors
+      if (drops[i] > 0) {
+        ctx.fillStyle = head;
+      } else {
+        ctx.fillStyle = Math.random() > 0.18 ? bright : dim;
+      }
       ctx.fillText(value, x, y);
 
       drops[i] += speeds[i];
-      if (y > height + Math.random() * 220) {
-        drops[i] = -Math.random() * 24;
-        speeds[i] = 0.45 + Math.random() * 0.35;
+
+      // Reset column after it exits the bottom; some start off-screen for variety
+      if (y > height + Math.random() * 200) {
+        drops[i] = -(Math.random() * 20 + 2);
+        speeds[i] = 0.28 + Math.random() * 0.28;
       }
     }
 

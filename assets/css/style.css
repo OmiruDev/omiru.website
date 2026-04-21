@@ -2898,22 +2898,30 @@ body::after {
    FULL-BODY BINARY RAIN LAYER
    ================================== */
 
-/* Replace old hardcoded pseudo-text rain with canvas rain */
+/* Suppress old CSS pseudo-element rain; canvas handles it */
 body::before,
 body::after {
   content: none !important;
 }
 
+/* Dark theme: near-pure black background so rain pops like the reference image */
 :root {
-  --binary-rain-trail: rgba(2, 12, 8, 0.2);
-  --binary-rain-char-bright: rgba(86, 255, 154, 0.9);
-  --binary-rain-char-dim: rgba(76, 236, 136, 0.62);
+  --binary-backdrop:
+    linear-gradient(180deg, #000000 0%, #050a05 100%);
+  --binary-rain-trail: rgba(0, 0, 0, 0.05);
+  --binary-rain-char-bright: rgba(0, 255, 70, 0.92);
+  --binary-rain-char-dim: rgba(0, 180, 50, 0.55);
+  --binary-rain-char-head: rgba(180, 255, 200, 1.0);
 }
 
+/* Light theme: keep a dark canvas so rain remains readable */
 :root[data-theme="light"] {
-  --binary-rain-trail: rgba(230, 255, 239, 0.2);
-  --binary-rain-char-bright: rgba(20, 153, 70, 0.84);
-  --binary-rain-char-dim: rgba(22, 128, 66, 0.56);
+  --binary-backdrop:
+    linear-gradient(180deg, #040c04 0%, #060f06 100%);
+  --binary-rain-trail: rgba(0, 0, 0, 0.05);
+  --binary-rain-char-bright: rgba(0, 230, 60, 0.9);
+  --binary-rain-char-dim: rgba(0, 165, 45, 0.55);
+  --binary-rain-char-head: rgba(200, 255, 210, 1.0);
 }
 
 .binary-rain-canvas {
@@ -2923,11 +2931,17 @@ body::after {
   height: 100vh;
   pointer-events: none;
   z-index: 0;
-  opacity: 0.82;
+  opacity: 1;
 }
 
 @media (max-width: 574px) {
   .binary-rain-canvas {
-    opacity: 0.74;
+    opacity: 0.92;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .binary-rain-canvas {
+    display: none;
   }
 }
